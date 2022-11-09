@@ -7,10 +7,12 @@ body {
 
 /******** Header ********/
 .header-section{
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
-  height: 10vh;
+  align-items: center;
+  height: 15%;
 }
 
 .overlook-container{
@@ -37,7 +39,7 @@ body {
   justify-content: center;
   align-items: center;
   border-color: white;
-  height: 90vh;
+  height: 80%;
 }
 
 /******** Dashboard View ********/
