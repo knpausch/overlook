@@ -1,6 +1,5 @@
 body {
   background-color: #C04646;
-  border-style: dashed;
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -9,7 +8,6 @@ body {
 /******** Header ********/
 .header-section{
   display: flex;
-  border-style: dashed;
   justify-content: center;
   justify-content: space-evenly;
   height: 10vh;
@@ -38,7 +36,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-style: dashed;
   border-color: white;
   height: 90vh;
 }
@@ -57,14 +54,14 @@ body {
 .past-bookings-container, .future-bookings-container, 
 .search-results-container{
   background-color: #D9D9D9;
-  border-style: solid;
   height: 80%;
   width: 50%;
   margin: 1%;
+  border-style: solid;
+  border-color: grey;
 }
 
 .middle-content{
-  border-style: solid;
   height: 80%;
   width: fit-content;
   margin: 1%;
@@ -79,7 +76,6 @@ body {
 
 .past-booking-item-container, .future-booking-item-container,
 .search-result-item-container{
-  border-style: solid;
   height: 5vh;
   width: 30vw;
   background-color: #FFFDFD;
@@ -87,6 +83,8 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 2%;
+  border-style: solid;
+  border-color: grey;
 }
 
 .total-cost-container, .to-booking-view-container{
@@ -97,6 +95,8 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 6%;
+  border-style: solid;
+  border-color: grey;
 }
 
 .amount-text{
@@ -113,6 +113,9 @@ body {
 }
 
 /******** Booking View ********/
+.available-rooms-text{
+  text-align: center;
+}
 
 .select-date-text, .select-room-text, .view-reservations-text{
   margin-top: 20px;
@@ -120,7 +123,6 @@ body {
 }
 
 .booking-controls-container{
-  border-style: solid;
   height: 80%;
   width: 50%;
   margin: 1%;
@@ -134,12 +136,13 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: #D9D9D9;
+  border-style: solid;
+  border-color: grey;
 }
 
 .field-and-submit, .dropdown-and-search{
   display: flex;
   justify-content: center;
-  border-style: dashed;
   margin: 0;
   padding: 0;
   height: 50px;
@@ -171,18 +174,12 @@ body {
   font-size: 18px;
 }
 
-.room-results{
-  border-style: dashed;
-}
-
 .bed-container{
-  border-style: dashed;
   margin: 0;
   width: 10%;
 }
 
 .text-search-result-item-container{
-  border-style: dashed;
   text-align: center;
   width: 70%;
 }
@@ -192,7 +189,7 @@ body {
 }
 
 .book-button{
-  width: 20%;
+  width: 21%;
   height: 100%;
   border: none;
   background-color: #C04646;
@@ -205,6 +202,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 50%;
+  color: rgb(71, 68, 68);
 }
 
 .hidden{
