@@ -18,7 +18,7 @@
     </div>
   </header>
   <main class="main">
-    <section class="dashboard-view hidden">
+    <section class="reservation-view hidden">
       <section class="past-bookings-container">
         <h2>Past Bookings</h2>
         <article class="past-booking-item-container">
@@ -56,47 +56,84 @@
     <section class="booking-view">
       <section class="booking-controls-container">
         <form class="date-input-container">
-          <h2>Select a Date</h2>
+          <h2 class="select-date-text">Select a Date</h2>
           <menu class="field-and-submit">
             <input class = "date-field" type="date" id="birthday" name="birthday">
-            <input class = "submit-date-button" type="submit">
+            <button class = "submit-date-button">Submit</button>
           </menu>
+        </form>
+        <form class="room-filter-container">
+          <h2 class="select-room-text">Select Room Type</h2>
+          <div class="dropdown-and-search">
+            <select class="dropdown-menu" name="room-types" id="room-types">
+              <option value="selectRoom">Select Room</option>
+              <option value="singleRoom">Single Room</option>
+              <option value="juniorSuite">Junior Suite</option>
+              <option value="suite">Suite</option>
+              <option value="residentialSuite">Residential Suite</option>
+            </select>
+            <button class = "submit-filter-button">Submit</button>
+          </div>
+        </form>
+        <form class="room-filter-container">
+          <h2 class="view-reservations-text">View Reservations</h2>
+          <button class = "reservation-view-button">Reservation View</button>
         </form>
       </section>
       <section class="filter-settings-container">
       </section>
       <article class="search-results-container">
-        <h2>Available Rooms</h2>
-        <article class="search-result-item-container">
-          <figure class="bed-container">
-            <div class="place-holder3">
-            </div>
-          </figure>
-          <article class="text-search-result-item-container">
-            <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+        <section class="room-results">
+          <h2>Available Rooms</h2>
+          <article class="search-result-item-container">
+            <figure class="bed-container">
+              <div class="place-holder3">
+              </div>
+            </figure>
+            <article class="text-search-result-item-container">
+              <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+            </article>
+            <button class="book-button">Book</button>
           </article>
-          <button class="book-button">Book</button>
-        </article>
-        <article class="search-result-item-container">
-          <figure class="bed-container">
-            <div class="place-holder3">
-            </div>
-          </figure>
-          <article class="text-search-result-item-container">
-            <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+          <article class="search-result-item-container">
+            <figure class="bed-container">
+              <div class="place-holder3">
+              </div>
+            </figure>
+            <article class="text-search-result-item-container">
+              <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+            </article>
+            <button class="book-button">Book</button>
           </article>
-          <button class="book-button">Book</button>
-        </article>
-        <article class="search-result-item-container">
-          <figure class="bed-container">
-            <div class="place-holder3">
-            </div>
-          </figure>
-          <article class="text-search-result-item-container">
-            <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+          <article class="search-result-item-container">
+            <figure class="bed-container">
+              <div class="place-holder3">
+              </div>
+            </figure>
+            <article class="text-search-result-item-container">
+              <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+            </article>
+            <button class="book-button">Book</button>
           </article>
-          <button class="book-button">Book</button>
-        </article>
+        </section>
+        <section class="no-results hidden">
+          <h2>Uh oh</h2>
+          <div class="place-holder1">
+          </div>
+          <h3>"On the behalf of The Overlook
+            Resort & Spa LLC. Pepsico, we regrettably
+            have to deliver you the unfortunate
+            news that no listings were found based
+            upon the search criteria provided.
+            Please adjust your search/filter settings
+            and we will be more than delighted to
+            host your stay at one of our 5-star
+            resorts*"
+            </h2>
+            <h2>- CEO Kiko “Smokin' Deals” Pausch</h2>
+            <h5>*excluding Hawaii and the US territories</h4>
+        </section>
+        
       </article>
     </section>
   </main>
