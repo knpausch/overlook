@@ -4,13 +4,104 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>The Overlook</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <header class="header-section">
+    <div class="place-holder1">
+    </div>
+    <div class="overlook-container">
+      <h1>The Overlook</h1>
+    </div>
+    <div class="pageview-container">
+      <h2>Reservation View</h1>
+    </div>
+  </header>
+  <main class="main">
+    <section class="dashboard-view hidden">
+      <section class="past-bookings-container">
+        <h2>Past Bookings</h2>
+        <article class="past-booking-item-container">
+          <h4>Date, king bed, single room, bidet, num beds</h4>
+        </article>
+        <article class="past-booking-item-container">
+          <h4>Date, king bed, single room, bidet, num beds</h4>
+        </article>
+        <article class="past-booking-item-container">
+          <h4>Date, king bed, single room, bidet, num beds</h4>
+        </article>
+      </section>
+      <section class="middle-content">
+        <div class="place-holder2">
+        </div>
+        <article class="total-cost-container">
+          <h4>Total Cost:</h4>
+          <h5 class="amount-text">$156.84</h5>
+        </article>
+        <article class="to-booking-view-container">
+          <h4>Book Your Stay Today!</h4>
+          <button class="booking-view-button">Booking View</button>
+        </article>
+      </section>
+      <section class="future-bookings-container">
+        <h2>Future Bookings</h2>
+        <article class="future-booking-item-container">
+          <h4>Date, king bed, single room, bidet, num beds</h4>
+        </article>
+        <article class="future-booking-item-container">
+          <h4>Date, king bed, single room, bidet, num beds</h4>
+        </article>
+      </section>
+    </section>
+    <section class="booking-view">
+      <section class="booking-controls-container">
+        <form class="date-input-container">
+          <h2>Select a Date</h2>
+          <menu class="field-and-submit">
+            <input class = "date-field" type="date" id="birthday" name="birthday">
+            <input class = "submit-date-button" type="submit">
+          </menu>
+        </form>
+      </section>
+      <section class="filter-settings-container">
+      </section>
+      <article class="search-results-container">
+        <h2>Available Rooms</h2>
+        <article class="search-result-item-container">
+          <figure class="bed-container">
+            <div class="place-holder3">
+            </div>
+          </figure>
+          <article class="text-search-result-item-container">
+            <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+          </article>
+          <button class="book-button">Book</button>
+        </article>
+        <article class="search-result-item-container">
+          <figure class="bed-container">
+            <div class="place-holder3">
+            </div>
+          </figure>
+          <article class="text-search-result-item-container">
+            <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+          </article>
+          <button class="book-button">Book</button>
+        </article>
+        <article class="search-result-item-container">
+          <figure class="bed-container">
+            <div class="place-holder3">
+            </div>
+          </figure>
+          <article class="text-search-result-item-container">
+            <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
+          </article>
+          <button class="book-button">Book</button>
+        </article>
+      </article>
+    </section>
+  </main>
+  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
