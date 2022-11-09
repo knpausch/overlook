@@ -237,6 +237,36 @@ body {
   margin-bottom: 20%;
 }
 
+/******** Images ********/
+.room-service-img{
+  height: 9vh;
+  width: 9vh;
+}
+
+.bed-img{
+  height: 4vh;
+  width: 4vh;
+}
+
+.sad-img{
+  height: 5vh;
+  width: 5vh;
+  filter: invert(22%) sepia(0%) saturate(1%) hue-rotate(345deg) brightness(96%) contrast(80%);
+}
+
+.relax-img{
+  height: 30vh;
+}
+
+.bell-img{
+  height: 12vh;
+  width: 12vh;
+}
+
+.lobby-img{
+  height: 58vh;
+}
+
 
 /******** Placeholders ********/
 .place-holder1{
