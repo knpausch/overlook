@@ -12,6 +12,10 @@ import './images/sad.png'
 import './images/relax.jpg'
 import './images/ring-bell.png'
 import './images/lobby.jpg'
+import './images/hotel.jpg'
+import './images/perspective.png'
+import './images/calendar.png'
+
 
 
 

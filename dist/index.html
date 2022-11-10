@@ -4,65 +4,95 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
   <title>The Overlook</title>
 </head>
 <body>
   <header class="header-section">
     <img class="room-service-img" src="./images/room-service.png" alt="hotel food service cart cartoon icon">
     <div class="overlook-container">
-      <h1>The Overlook</h1>
+      <h1>The Overlook Hotel ™</h1>
     </div>
     <div class="pageview-container">
       <h2>Reservation View</h1>
     </div>
   </header>
   <main class="main">
-    <section class="login-view">
-      <figure class="login-picture">
-        <img class="lobby-img" src="./images/lobby.jpg" alt="hipster hotel lobby full of poofy chairs and lots of framed art">
-      </figure>
-      <form class="login-form">
-        <h3>Book Your 2022 "Treat Yo' Self" Trip</h2>
+    <!-- LOGIN VIEW -->
+    <section class="login-view hidden">
+      <img class="hotel-img" src="./images/hotel.jpg" alt="outdoor view of hipster hotel at night time, looks expensive">
+      <img class="lobby-img" src="./images/lobby.jpg" alt="hipster hotel lobby full of poofy chairs and lots of framed art">
+      <form class="login-form hidden">
+        <h3 class="book-your-2022-text">Book Your 2022 "Treat Yo' Self" Trip</h2>
         <input class="username-textbox" type="text" id="username" name="username" placeholder="Username">
         <input class="password-textbox" type="text" id="password" name="password" placeholder="Password">
         <button class = "login-button">Login</button>
         <img class="bell-img" src="./images/ring-bell.png" alt="service bell cartoon icon">
       </form>
     </section>
-    <section class="reservation-view hidden">
+    <!-- RESERVATION VIEW -->
+    <section class="reservation-view">
       <section class="past-bookings-container">
-        <h2>Past Bookings</h2>
+        <h2>Past Reservations</h2>
         <article class="past-booking-item-container">
-          <h4>Date, king bed, single room, bidet, num beds</h4>
+          <figure class="checkmark-container">
+            <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
+          </figure>
+          <article class="past-text-item-container">
+            <h4>Date, king bed, single room, bidet, num beds</h4>
+          </article>
         </article>
         <article class="past-booking-item-container">
-          <h4>Date, king bed, single room, bidet, num beds</h4>
+          <figure class="checkmark-container">
+            <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
+          </figure>
+          <article class="past-text-item-container">
+            <h4>Date, king bed, single room, bidet, num beds</h4>
+          </article>
         </article>
         <article class="past-booking-item-container">
-          <h4>Date, king bed, single room, bidet, num beds</h4>
+          <figure class="checkmark-container">
+            <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
+          </figure>
+          <article class="past-text-item-container">
+            <h4>Date, king bed, single room, bidet, num beds</h4>
+          </article>
         </article>
       </section>
       <section class="middle-content">
         <img class="relax-img" src="./images/relax.jpg" alt="relaxing dinner table next to the window">
         <article class="total-cost-container">
-          <h4>Total Cost:</h4>
+          <h4 class="total-cost-text">Total Cost:</h4>
           <h5 class="amount-text">$156.84</h5>
         </article>
         <article class="to-booking-view-container">
-          <h4>Book Your Stay Today!</h4>
-          <button class="booking-view-button">Booking View</button>
+          <h4 class="book-your-stay-text">Book Your Stay Today!</h4>
+          <button class="booking-view-button">Book a Room</button>
         </article>
       </section>
       <section class="future-bookings-container">
-        <h2>Future Bookings</h2>
+        <h2>Upcoming Reservations</h2>
         <article class="future-booking-item-container">
-          <h4>Date, king bed, single room, bidet, num beds</h4>
+          <figure class="calendar-container">
+            <img class="calendar-img" src="./images/calendar.png" alt="cartoon calendar icon">
+          </figure>
+          <article class="future-text-item-container">
+            <h4>Date, king bed, single room, bidet, num beds</h4>
+          </article>
         </article>
         <article class="future-booking-item-container">
-          <h4>Date, king bed, single room, bidet, num beds</h4>
+          <figure class="calendar-container">
+            <img class="calendar-img" src="./images/calendar.png" alt="cartoon calendar icon">
+          </figure>
+          <article class="future-text-item-container">
+            <h4>Date, king bed, single room, bidet, num beds</h4>
+          </article>
         </article>
       </section>
     </section>
+    <!-- BOOKING VIEW -->
     <section class="booking-view hidden">
       <section class="booking-controls-container">
         <form class="date-input-container">
@@ -93,7 +123,8 @@
       <section class="filter-settings-container">
       </section>
       <article class="search-results-container">
-        <section class="room-results hidden">
+        <!-- RESULTS FOUND -->
+        <section class="room-results">
           <h2 class="available-rooms-text">Available Rooms</h2>
           <article class="search-result-item-container">
             <figure class="bed-container">
@@ -123,6 +154,7 @@
             <button class="book-button">Book</button>
           </article>
         </section>
+        <!-- RESULTS NOT FOUND -->
         <section class="no-results hidden">
           <h2>Uh oh</h2>
           <img class="sad-img" src="./images/sad.png" alt="sad face cartoon icon">
@@ -139,11 +171,9 @@
             <h2>- CEO Kiko “Smokin' Deals” Pausch</h2>
             <h5>*excluding Hawaii and the US territories</h4>
         </section>
-        
       </article>
     </section>
   </main>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>
