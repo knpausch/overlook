@@ -1,3 +1,313 @@
+*{
+  font-family: 'Prata', serif;
+}
+
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background-color: #C04646;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+/******** Header ********/
+.header-section{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 15%;
+}
+
+.overlook-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+
+.pageview-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+}
+
+.overlook-container, .pageview-container{
+  background-color: #FFFDFD;
+}
+
+/******** Main ********/
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: white;
+  height: 80%;
+}
+
+/******** Dashboard View ********/
+
+.reservation-view, .booking-view, .login-view{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #FFFDFD;
+  height: 90%;
+  width: 95%;
+}
+
+.past-bookings-container, .future-bookings-container, 
+.search-results-container{
+  background-color: #D9D9D9;
+  height: 80%;
+  width: 50%;
+  margin: 1%;
+  border-style: solid;
+  border-color: grey;
+}
+
+.middle-content{
+  height: 80%;
+  width: fit-content;
+  margin: 1%;
+}
+
+.past-bookings-container, .future-bookings-container, .middle-content, 
+.search-results-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.past-booking-item-container, .future-booking-item-container,
+.search-result-item-container{
+  height: 5vh;
+  width: 30vw;
+  background-color: #FFFDFD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2%;
+  border-style: solid;
+  border-color: grey;
+}
+
+.total-cost-container, .to-booking-view-container{
+  background-color: #D9D9D9;
+  height: 150px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6%;
+  border-style: solid;
+  border-color: grey;
+}
+
+.book-your-stay-text, .total-cost-text{
+  margin: 0;
+  margin-bottom: 2%;
+}
+
+.amount-text{
+  margin: 0;
+}
+
+.booking-view-button{
+  border: none;
+  background-color: #C04646;
+  color: white;
+  font-size: 18px;
+  width: 160px;
+  height: 50px;
+}
+
+/******** Booking View ********/
+.available-rooms-text{
+  text-align: center;
+}
+
+.select-date-text, .select-room-text, .view-reservations-text{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.booking-controls-container{
+  height: 80%;
+  width: 50%;
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.date-input-container, .room-filter-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #D9D9D9;
+  border-style: solid;
+  border-color: grey;
+}
+
+.field-and-submit, .dropdown-and-search{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.dropdown-menu{
+  margin-bottom: 20px;
+  height: 50px;
+  font-size: 18px;
+}
+
+.submit-date-button, .submit-filter-button, .reservation-view-button{
+  border: none;
+  background-color: #C04646;
+  color: white;
+  width: 100px;
+  font-size: 18px;
+}
+
+.reservation-view-button{
+  width: 200px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.date-field{
+  height: 50px;
+  font-size: 18px;
+}
+
+.bed-container, .checkmark-container, .calendar-container{
+  margin: 0;
+  width: 10%;
+}
+
+.text-search-result-item-container, .past-text-item-container,
+.future-text-item-container{
+  text-align: center;
+  width: 70%;
+}
+
+.text-search-result-item{
+  margin: 0;
+}
+
+.book-button{
+  width: 21%;
+  height: 100%;
+  border: none;
+  background-color: #C04646;
+  color: white;
+  font-size: 18px;
+}
+
+.no-results, .saved-booking{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  color: rgb(71, 68, 68);
+}
+
+.hidden{
+  display: none;
+}
+
+/******** Login View ********/
+.book-your-2022-text{
+  text-align: center;
+}
+
+.login-form{
+  background-color: #D9D9D9;
+  height: 80%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.username-textbox, .password-textbox{
+  font-size: 25px;
+  height: 40px;
+  margin-bottom: 10%;
+}
+
+.login-button{
+  border: none;
+  background-color: #C04646;
+  color: white;
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+  margin-bottom: 20%;
+}
+
+/******** Images ********/
+.room-service-img{
+  height: 9vh;
+  width: 9vh;
+}
+
+.bed-img, .check-img, .calendar-img{
+  height: 4vh;
+  width: 4vh;
+}
+
+.sad-img, .happy-img{
+  height: 5vh;
+  width: 5vh;
+  filter: invert(22%) sepia(0%) saturate(1%) hue-rotate(345deg) brightness(96%) contrast(80%);
+}
+
+.relax-img{
+  height: 30vh;
+}
+
+.bell-img{
+  height: 12vh;
+  width: 12vh;
+}
+
+.lobby-img, .hotel-img{
+  height: 58vh;
+}
+
+/******** Placeholders ********/
+.place-holder1{
+  height: 90px;
+  width: 90px;
+  background-color: grey;
+  border-style: solid;
+}
+
+.place-holder2{
+  height: 300px;
+  width: 200px;
+  background-color: grey;
+  border-style: solid;
+}
+
+.place-holder3{
+  height: 25px;
+  width: 25px;
+  background-color: grey;
+  border-style: solid;
+}
+
+.place-holder4{
+  height: 600px;
+  width: 1300px;
+  background-color: grey;
+  border-style: solid;
 }
