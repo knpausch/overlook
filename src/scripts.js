@@ -1,10 +1,4 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
-import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
+//////////// Image Import ////////////
 import './images/turing-logo.png'
 import './images/room-service.png'
 import './images/bed.png'
@@ -17,18 +11,22 @@ import './images/hotel.jpg'
 import './images/perspective.png'
 import './images/calendar.png'
 
+//////////// File Import ////////////
+import './css/styles.css';
 import getData from './apiCalls'
 import Customer from './Customer'
 
+//////////// API URLS ////////////
 const customersURL = 'http://localhost:3001/api/v1/customers'
 
+//////////// GLOBAL VARIABLES ////////////
 let apiCustomer
 let currentCustomer
 
-console.log('This is the JavaScript entry file - your code begins here.')
-
+//////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL]))
 
+//////////// FUNCTIONS ////////////
 function fetchData(urls) {
     Promise.all([getData(urls[0])])
         .then(data => {
@@ -41,5 +39,6 @@ function fetchData(urls) {
 
 function createCustomer(data) {
     currentCustomer = new Customer(data)
+    console.log(currentCustomer)
     return currentCustomer
 }
