@@ -211,7 +211,7 @@ body {
   font-size: 18px;
 }
 
-.no-results{
+.no-results, .saved-booking{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -264,7 +264,7 @@ body {
   width: 4vh;
 }
 
-.sad-img{
+.sad-img, .happy-img{
   height: 5vh;
   width: 5vh;
   filter: invert(22%) sepia(0%) saturate(1%) hue-rotate(345deg) brightness(96%) contrast(80%);
