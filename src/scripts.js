@@ -23,6 +23,8 @@ const customersURL = 'http://localhost:3001/api/v1/customers'
 let apiCustomer
 let currentCustomer
 
+const currentUser = document.querySelector('#userText')
+
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL]))
 
@@ -33,6 +35,7 @@ function fetchData(urls) {
             apiCustomer = data[0]
             console.log(apiCustomer.customers[0])
             createCustomer(apiCustomer.customers[0])
+            displayAccountInfo()
         })
         .catch(err => console.log(err))
 }
@@ -41,4 +44,8 @@ function createCustomer(data) {
     currentCustomer = new Customer(data)
     console.log(currentCustomer)
     return currentCustomer
+}
+
+function displayAccountInfo(){
+    currentUser.innerText = "User: " + currentCustomer.name
 }
