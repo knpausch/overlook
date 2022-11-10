@@ -17,7 +17,29 @@ import './images/hotel.jpg'
 import './images/perspective.png'
 import './images/calendar.png'
 
+import getData from './apiCalls'
+import Customer from './Customer'
 
+const customersURL = 'http://localhost:3001/api/v1/customers'
 
+let apiCustomer
+let currentCustomer
 
-console.log('This is the JavaScript entry file - your code begins here.');
+console.log('This is the JavaScript entry file - your code begins here.')
+
+window.addEventListener('load', fetchData([customersURL]))
+
+function fetchData(urls) {
+    Promise.all([getData(urls[0])])
+        .then(data => {
+            apiCustomer = data[0]
+            console.log(apiCustomer.customers[0])
+            createCustomer(apiCustomer.customers[0])
+        })
+        .catch(err => console.log(err))
+}
+
+function createCustomer(data) {
+    currentCustomer = new Customer(data)
+    return currentCustomer
+}
