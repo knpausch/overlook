@@ -14,7 +14,6 @@ class Customer {
     }
 
     formatMyBookings(roomData){
-        // console.log("lets do this")
         return this.pastBookings.map((currentBooking) => {
             let customerInfo = {}
             customerInfo.date = currentBooking.date

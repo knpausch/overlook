@@ -31,6 +31,7 @@ let currentCustomer
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
+const pastBookingsList = document.querySelector('#pastReservationsDatalist')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -42,9 +43,7 @@ function fetchData(urls) {
             apiCustomer = data[0].customers
             apiBookings = data[1].bookings
             apiRooms = data[2].rooms
-
             createCustomer(apiCustomer[0])
-
             displayAccountInfo()
         })
         .catch(err => console.log(err))
@@ -62,6 +61,21 @@ function displayAccountInfo(){
     currentUser.innerText = "User: " + currentCustomer.name
 
     currentCustomer.findMyBookings(apiBookings)
-    console.log("did it do it?: ", currentCustomer.formatMyBookings(apiRooms))
-    // console.log("here: ", currentCustomer.pastBookings)
+    displayPastBookings()
+}
+
+function displayPastBookings(){
+    const formattedPastBookingsList = currentCustomer.formatMyBookings(apiRooms)
+    console.log("did it do it?: ", formattedPastBookingsList)
+    formattedPastBookingsList.forEach((currentPastBooking) => {
+        pastBookingsList.innerHTML += 
+        `<article class="past-booking-item-container">
+        <figure class="checkmark-container">
+          <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
+        </figure>
+        <article class="past-text-item-container">
+          <h4 id="past-reservation-item-text"> ${currentPastBooking.date} ${currentPastBooking.roomType} ${currentPastBooking.bedSize}</h4>
+        </article>
+      </article>`
+    })
 }
