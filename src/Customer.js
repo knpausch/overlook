@@ -10,7 +10,9 @@ class Customer {
     createBooking(bookingData){
         console.log("ok cuzz")
         return bookingData.map((currentBooking) => {
-            return new Booking(currentBooking)
+            const myBooking = new Booking(currentBooking)
+            myBooking.setDateValues()
+            return myBooking
         })
     }
 

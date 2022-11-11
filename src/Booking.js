@@ -11,7 +11,9 @@ class Booking{
 
     setDateValues(){
         let chargeDate = this.date.split("/")
-        console.log("ok son")
+        this.year = chargeDate[0]
+        this.month = chargeDate[1]
+        this.day = chargeDate[2]
     }
 
 }
