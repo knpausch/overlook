@@ -32,24 +32,6 @@ class Customer {
             return currentBooking.userID === this.id && currentBooking.checkBookingIsUpcoming()
         })
     }
-
-    // formatBookings(roomData){
-    //     return this.pastBookings.map((currentBooking) => {
-    //         let customerInfo = {}
-    //         customerInfo.date = currentBooking.date
-    //         customerInfo.id = currentBooking.id
-    //         const roomInfo = roomData.find((currentRoom) => {
-    //           return currentRoom.number === currentBooking.roomNumber
-    //         })
-    //         console.log("whatsup: ", roomInfo)
-    //         customerInfo.roomType = roomInfo.roomType
-    //         customerInfo.bidet = roomInfo.bidet
-    //         customerInfo.bedSize = roomInfo.bedSize
-    //         customerInfo.numBeds = roomInfo.numBeds
-    //         customerInfo.costPerNight = roomInfo.costPerNight
-    //         return customerInfo
-    //       })
-    // }
 }
 
 export default Customer

@@ -76,8 +76,8 @@ function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
     gatherUsersAccountInfo()
     displayPastBookings()
-    displayTotalCost()
     displayUpcomingBookings()
+    displayTotalCost()
 }
 
 function gatherUsersAccountInfo(){
@@ -152,12 +152,10 @@ function displayUpcomingBookings(){
 }
 
 function displayTotalCost(){
-    //WIP: Need to finish Rooom class and formatBookings = currently roadblock
-    // currentCustomer.findCustomersBookings(allBookings)
-    // allCustomerBookings = currentCustomer.allBookings
-    // console.log("for real: ", allCustomerBookings)
+    currentCustomer.findCustomersBookings(allBookings)
+    const formatedList = formatReservationInfo(currentCustomer.allBookings)
 
-    let cumlativeCharge = customerPastBookings.reduce((total, booking) => {
+    let cumlativeCharge = formatedList.reduce((total, booking) => {
         total += booking.costPerNight
         return total
     }, 0)
@@ -190,6 +188,4 @@ function formatReservationInfo(reservationList){
 }
 
 //TO DO:
-//update displayTotalCost so it is cost of ALL rooms (past and current)
-//incorporate Room class and redo formatBookings function in Customer
 //sort date in descending order (past and upcoming reservations)
