@@ -39,18 +39,11 @@ window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL])
 function fetchData(urls) {
     Promise.all([getData(urls[0]), getData(urls[1]), getData(urls[2])])
         .then(data => {
-            apiCustomer = data[0]
-            apiBookings = data[1]
-            apiRooms = data[2]
+            apiCustomer = data[0].customers
+            apiBookings = data[1].bookings
+            apiRooms = data[2].rooms
 
-            createCustomer(apiCustomer.customers[0])
-
-            // const myRoom = new Room(apiRooms.rooms[0])
-            // console.log("myRoom: ", myRoom)
-            // const myBooking = new Booking(apiBookings.bookings[0])
-            // console.log('booking: ', myBooking)
-            // console.log("room: ", data[2].rooms[0])
-            // console.log("bookings: ", data[1].bookings[0])
+            createCustomer(apiCustomer[0])
 
             displayAccountInfo()
         })
@@ -68,6 +61,7 @@ function createCustomer(data) {
 function displayAccountInfo(){
     currentUser.innerText = "User: " + currentCustomer.name
 
-    currentCustomer.findMyBookings(apiBookings.bookings)
-    console.log("here: ", currentCustomer.pastBookings)
+    currentCustomer.findMyBookings(apiBookings)
+    console.log("did it do it?: ", currentCustomer.formatMyBookings(apiRooms))
+    // console.log("here: ", currentCustomer.pastBookings)
 }
