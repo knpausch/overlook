@@ -44,10 +44,11 @@ function fetchData(urls) {
             apiRooms = data[2]
 
             createCustomer(apiCustomer.customers[0])
-            const myRoom = new Room(apiRooms.rooms[0])
-            console.log("myRoom: ", myRoom)
-            const myBooking = new Booking(apiBookings.bookings[0])
-            console.log('booking: ', myBooking)
+
+            // const myRoom = new Room(apiRooms.rooms[0])
+            // console.log("myRoom: ", myRoom)
+            // const myBooking = new Booking(apiBookings.bookings[0])
+            // console.log('booking: ', myBooking)
             // console.log("room: ", data[2].rooms[0])
             // console.log("bookings: ", data[1].bookings[0])
 
@@ -57,6 +58,8 @@ function fetchData(urls) {
 }
 
 function createCustomer(data) {
+    // const randomUser = data[Math.floor(Math.random() * data.length)]
+    // currentCustomer = new Customer(randomUser)
     currentCustomer = new Customer(data)
     console.log(currentCustomer)
     return currentCustomer
@@ -64,4 +67,7 @@ function createCustomer(data) {
 
 function displayAccountInfo(){
     currentUser.innerText = "User: " + currentCustomer.name
+
+    currentCustomer.findMyBookings(apiBookings.bookings)
+    console.log("here: ", currentCustomer.pastBookings)
 }
