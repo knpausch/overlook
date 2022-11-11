@@ -31,6 +31,7 @@ let currentCustomer
 let customerPastBookings
 let customerUpcomingBookings
 let allBookings
+let allCustomerBookings
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -66,17 +67,20 @@ function createCustomer(data) {
 
 function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
-    currentCustomer.findPastBookings(allBookings)
-    console.log("past bookings: ", currentCustomer.pastBookings)
-    customerPastBookings = currentCustomer.pastBookings
-
-    currentCustomer.findUpcomingBookings(allBookings)
-    console.log("upcomming bookings: ", currentCustomer.upcomingBookings)
-    customerUpcomingBookings = currentCustomer.upcomingBookings
-    // console.log("yee: ", currentCustomer.findUpcomingBookings(allBookings))
+    gatherUsersAccountInfo()
     displayPastBookings()
     displayTotalCost()
     displayUpcomingBookings()
+}
+
+function gatherUsersAccountInfo(){
+    currentCustomer.findPastBookings(allBookings)
+    customerPastBookings = currentCustomer.pastBookings
+    console.log("past bookings: ", customerPastBookings)
+
+    currentCustomer.findUpcomingBookings(allBookings)
+    customerUpcomingBookings = currentCustomer.upcomingBookings
+    console.log("upcomming bookings: ", customerUpcomingBookings)
 }
 
 function displayPastBookings(){
@@ -127,6 +131,11 @@ function displayUpcomingBookings(){
 }
 
 function displayTotalCost(){
+    //WIP: Need to finish Rooom class and formatBookings = currently roadblock
+    // currentCustomer.findCustomersBookings(allBookings)
+    // allCustomerBookings = currentCustomer.allBookings
+    // console.log("for real: ", allCustomerBookings)
+
     let cumlativeCharge = customerPastBookings.reduce((total, booking) => {
         total += booking.costPerNight
         return total
@@ -137,3 +146,8 @@ function displayTotalCost(){
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
+
+//TO DO:
+//update displayTotalCost so it is cost of ALL rooms (past and current)
+//incorporate Room class and redo formatBookings function in Customer
+//sort date in descending order (past and upcoming reservations)

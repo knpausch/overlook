@@ -6,12 +6,18 @@ class Customer {
         this.name = data.name
         this.pastBookings = []
         this.upcomingBookings = []
+        this.allBookings = []
     }
 
     createBooking(bookingData){
         return bookingData.map((currentBooking) => {
-            const myBooking = new Booking(currentBooking)
-            return myBooking
+            return new Booking(currentBooking)
+        })
+    }
+
+    findCustomersBookings(bookingData){
+        this.allBookings = bookingData.filter((currentBooking) => {
+            return currentBooking.userID === this.id
         })
     }
 
