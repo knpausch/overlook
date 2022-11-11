@@ -1,3 +1,5 @@
+import Room from './Room'
+
 class Booking{
     constructor(data){
         this.id = data.id

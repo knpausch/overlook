@@ -32,6 +32,7 @@ let customerPastBookings
 let customerUpcomingBookings
 let allBookings
 let allCustomerBookings
+let allRooms
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -50,7 +51,7 @@ function fetchData(urls) {
             apiBookings = data[1].bookings
             apiRooms = data[2].rooms
             createCustomer(apiCustomer[0])
-
+            createRooms(apiRooms)
             displayAccountInfo()
         })
         .catch(err => console.log(err))
@@ -65,6 +66,12 @@ function createCustomer(data) {
     return currentCustomer
 }
 
+function createRooms(data){
+    allRooms = data.map((currentBooking) => {
+        return new Room(currentBooking)
+    })
+}
+
 function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
     gatherUsersAccountInfo()
@@ -76,17 +83,17 @@ function displayAccountInfo(){
 function gatherUsersAccountInfo(){
     currentCustomer.findPastBookings(allBookings)
     customerPastBookings = currentCustomer.pastBookings
-    console.log("past bookings: ", customerPastBookings)
+    // console.log("past bookings: ", customerPastBookings)
 
     currentCustomer.findUpcomingBookings(allBookings)
     customerUpcomingBookings = currentCustomer.upcomingBookings
-    console.log("upcomming bookings: ", customerUpcomingBookings)
+    // console.log("upcomming bookings: ", customerUpcomingBookings)
 }
 
 function displayPastBookings(){
     let bedGrammar = ''
-    customerPastBookings = currentCustomer.formatBookings(apiRooms)
-    customerPastBookings.forEach((booking) => {
+    let formatedPastBookings = formatReservationInfo(customerPastBookings)
+    formatedPastBookings.forEach((booking) => {
         if(booking.numBeds === 1){
             bedGrammar = 'Bed'
         }
@@ -99,9 +106,10 @@ function displayPastBookings(){
           <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
         </figure>
         <article class="past-text-item-container">
-          <h4 id="past-reservation-item-text">${booking.date} 
-          ${capitalizeFirstLetter(booking.roomType)}, 
-          ${capitalizeFirstLetter(booking.bedSize)}, 
+          <h4 id="past-reservation-item-text">
+          ${booking.date}, 
+          ${capitalizeFirstLetter(booking.roomType)},
+          ${capitalizeFirstLetter(booking.bedSize)},
           ${booking.numBeds} ${bedGrammar}</h4>
         </article>
       </article>`
@@ -109,22 +117,35 @@ function displayPastBookings(){
 }
 
 function displayUpcomingBookings(){
+    console.log("upcoming: ", customerUpcomingBookings)
     let bedGrammar = ''
-    // customerUpcomingBookings = currentCustomer.formatBookings(apiRooms)
-    customerUpcomingBookings.forEach((booking) => {
+    let bidetStatus = ''
+    let formatedUpcomingBookings = formatReservationInfo(customerUpcomingBookings)
+    formatedUpcomingBookings.forEach((booking) => {
         if(booking.numBeds === 1){
             bedGrammar = 'Bed'
         }
         else{
             bedGrammar = 'Beds'
         }
+        if(booking.bidet){
+            bidetStatus = "Yes"
+        }
+        else{
+            bidetStatus = "No"
+        }
         upcomingBookingsList.innerHTML += 
-        `<article class="future-booking-item-container">
+        `<article class="past-booking-item-container">
         <figure class="calendar-container">
-          <img class="calendar-img" src="./images/calendar.png" alt="cartoon calendar icon">
+          <img class="calendar-img" src="./images/calendar.png" alt="carton calendar icon">
         </figure>
-        <article class="future-text-item-container">
-          <h4>${booking.date}</h4>
+        <article class="past-text-item-container">
+          <h4 id="past-reservation-item-text">
+          ${booking.date}, 
+          ${capitalizeFirstLetter(booking.roomType)},
+          ${capitalizeFirstLetter(booking.bedSize)},
+          ${booking.numBeds} ${bedGrammar},
+          Bidet: ${bidetStatus}</h4>
         </article>
       </article>`
     })
@@ -145,6 +166,27 @@ function displayTotalCost(){
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function formatReservationInfo(reservationList){
+    const formatedInfo = reservationList.map((currentBooking) => {
+        let customerInfo = {}
+        customerInfo.date = currentBooking.date
+        customerInfo.id = currentBooking.id
+
+        const roomInfo = allRooms.find((currentRoom) => {
+            return currentRoom.roomNumber === currentBooking.roomNumber
+        })
+
+        customerInfo.roomType = roomInfo.roomType
+        customerInfo.bidet = roomInfo.bidet
+        customerInfo.bedSize = roomInfo.bedSize
+        customerInfo.numBeds = roomInfo.numBeds
+        customerInfo.costPerNight = roomInfo.costPerNight
+
+        return customerInfo
+    })
+    return formatedInfo
 }
 
 //TO DO:
