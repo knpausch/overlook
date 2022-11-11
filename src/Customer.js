@@ -8,25 +8,25 @@ class Customer {
     }
 
     createBooking(bookingData){
-        console.log("ok cuzz")
+        // console.log("ok cuzz")
         return bookingData.map((currentBooking) => {
             const myBooking = new Booking(currentBooking)
-            myBooking.setDateValues()
             return myBooking
         })
     }
 
     findCustomerBookings(bookingData){
-        const date = new Date();
-        let currentDay = date.getDate();
-        let currentMonth = date.getMonth() + 1;
-        let currentYear = date.getFullYear();
-        let currentDate = `${currentYear}${currentMonth}${currentDay}`;
-        currentDate = Number(currentDate)
-        console.log("current date: ", currentDate);
-        const chargeDate = bookingData[0].date.split("/")
-        let dateString = chargeDate.join("")
-        console.log("boom: ", Number(dateString))
+        // const date = new Date();
+        // let currentDay = date.getDate();
+        // let currentMonth = date.getMonth() + 1;
+        // let currentYear = date.getFullYear();
+        // let currentDate = `${currentYear}${currentMonth}${currentDay}`;
+        // currentDate = Number(currentDate)
+
+        // console.log("current date: ", currentDate);
+        // const chargeDate = bookingData[0].date.split("/")
+        // let dateString = chargeDate.join("")
+        // console.log("boom: ", Number(dateString))
         // let chargeYear = chargeDate[0]
         // let chargeMonth = chargeDate[1]
         // let chargeDay = chargeDate[2]
@@ -38,10 +38,16 @@ class Customer {
 
         // bookingData.setDateValues()
 
+        console.log("ok boy: ",bookingData[0].checkBookingIsUpcoming())
+
         this.pastBookings = bookingData.filter((currentBooking) => {
-        let chargeDate = currentBooking.date.split("/")
-        chargeDate = Number(chargeDate.join(""))
-            return currentBooking.userID === this.id && chargeDate < currentDate
+        // let chargeDate = currentBooking.date.split("/")
+        // chargeDate = Number(chargeDate.join(""))
+        // console.log("okk:", currentBooking.formatDate())
+        // currentBooking.formatDate()
+        // console.log("ay boi: ",currentBooking.numberedDate)
+            return currentBooking.userID === this.id && !currentBooking.checkBookingIsUpcoming()
+            // && currentBooking.checkBookingIsUpcoming()
         })
 
         // this.pastBookings.sort((bookingA, bookingB) => {

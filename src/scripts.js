@@ -59,9 +59,9 @@ function createCustomer(data) {
     currentCustomer = new Customer(data)
     console.log(currentCustomer)
     allBookings = currentCustomer.createBooking(apiBookings)
-    console.log("come'on boy: ", allBookings[0].year)
-    console.log("come'on boy: ", allBookings[0].month)
-    console.log("come'on boy: ", allBookings[0].day)
+    // console.log("come'on boy: ", allBookings[0].year)
+    // console.log("come'on boy: ", allBookings[0].month)
+    // console.log("come'on boy: ", allBookings[0].day)
 
     // console.log("lets try: ", allBookings)
     return currentCustomer
@@ -77,7 +77,7 @@ function displayAccountInfo(){
 function displayPastBookings(){
     let bedGrammar = ''
     customerPastBookings = currentCustomer.formatBookings(apiRooms)
-    console.log("did it do it?: ", customerPastBookings)
+    console.log("this ladys bookings: ", customerPastBookings)
     customerPastBookings.forEach((booking) => {
         if(booking.numBeds === 1){
             bedGrammar = 'Bed'

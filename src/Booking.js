@@ -4,18 +4,37 @@ class Booking{
         this.userID = data.userID
         this.date = data.date
         this.roomNumber = data.roomNumber
-        this.year = 0
-        this.month = 0
-        this.day = 0
+        this.numberedDate = 0
     }
 
-    setDateValues(){
+    formatDate(){
         let chargeDate = this.date.split("/")
-        this.year = chargeDate[0]
-        this.month = chargeDate[1]
-        this.day = chargeDate[2]
+        chargeDate = Number(chargeDate.join(""))
+        this.numberedDate = chargeDate
+        // return chargeDate
     }
 
+    checkBookingIsUpcoming(){
+        this.formatDate()
+
+        const date = new Date();
+        let currentDay = date.getDate();
+        let currentMonth = date.getMonth() + 1;
+        let currentYear = date.getFullYear();
+        let currentDate = `${currentYear}${currentMonth}${currentDay}`;
+        currentDate = Number(currentDate)
+
+        console.log("currentDate: ", currentDate)
+        console.log("chargeDate: ", this.numberedDate)
+
+
+        if(this.numberedDate >= currentDate){
+            return true
+        }
+        else{
+            return false
+        }
+    }
 }
 
 export default Booking
