@@ -63,7 +63,7 @@ body {
 
 /******** Dashboard View ********/
 
-.past-bookings-container{
+.past-bookings-container, .future-bookings-container{
   max-height:100%;
   overflow:auto;
 }

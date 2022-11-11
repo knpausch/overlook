@@ -11,22 +11,16 @@ class Booking{
         let chargeDate = this.date.split("/")
         chargeDate = Number(chargeDate.join(""))
         this.numberedDate = chargeDate
-        // return chargeDate
     }
 
     checkBookingIsUpcoming(){
         this.formatDate()
-
-        const date = new Date();
-        let currentDay = date.getDate();
-        let currentMonth = date.getMonth() + 1;
-        let currentYear = date.getFullYear();
-        let currentDate = `${currentYear}${currentMonth}${currentDay}`;
+        const date = new Date()
+        let currentDay = date.getDate()
+        let currentMonth = date.getMonth() + 1
+        let currentYear = date.getFullYear()
+        let currentDate = `${currentYear}${currentMonth}${currentDay}`
         currentDate = Number(currentDate)
-
-        console.log("currentDate: ", currentDate)
-        console.log("chargeDate: ", this.numberedDate)
-
 
         if(this.numberedDate >= currentDate){
             return true

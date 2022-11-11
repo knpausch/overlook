@@ -29,12 +29,14 @@ let apiBookings
 let apiRooms
 let currentCustomer
 let customerPastBookings
+let customerUpcomingBookings
 let allBookings
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
 const pastBookingsList = document.querySelector('#pastReservationsDatalist')
 const amountText = document.querySelector('#amountText')
+const upcomingBookingsList = document.querySelector('#upcomingReservationsDatalist')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -59,25 +61,27 @@ function createCustomer(data) {
     currentCustomer = new Customer(data)
     console.log(currentCustomer)
     allBookings = currentCustomer.createBooking(apiBookings)
-    // console.log("come'on boy: ", allBookings[0].year)
-    // console.log("come'on boy: ", allBookings[0].month)
-    // console.log("come'on boy: ", allBookings[0].day)
-
-    // console.log("lets try: ", allBookings)
     return currentCustomer
 }
 
 function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
-    currentCustomer.findCustomerBookings(allBookings)
+    currentCustomer.findPastBookings(allBookings)
+    console.log("past bookings: ", currentCustomer.pastBookings)
+    customerPastBookings = currentCustomer.pastBookings
+
+    currentCustomer.findUpcomingBookings(allBookings)
+    console.log("upcomming bookings: ", currentCustomer.upcomingBookings)
+    customerUpcomingBookings = currentCustomer.upcomingBookings
+    // console.log("yee: ", currentCustomer.findUpcomingBookings(allBookings))
     displayPastBookings()
     displayTotalCost()
+    displayUpcomingBookings()
 }
 
 function displayPastBookings(){
     let bedGrammar = ''
     customerPastBookings = currentCustomer.formatBookings(apiRooms)
-    console.log("this ladys bookings: ", customerPastBookings)
     customerPastBookings.forEach((booking) => {
         if(booking.numBeds === 1){
             bedGrammar = 'Bed'
@@ -91,10 +95,32 @@ function displayPastBookings(){
           <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
         </figure>
         <article class="past-text-item-container">
-          <h4 id="past-reservation-item-text"> ${booking.date} 
+          <h4 id="past-reservation-item-text">${booking.date} 
           ${capitalizeFirstLetter(booking.roomType)}, 
           ${capitalizeFirstLetter(booking.bedSize)}, 
           ${booking.numBeds} ${bedGrammar}</h4>
+        </article>
+      </article>`
+    })
+}
+
+function displayUpcomingBookings(){
+    let bedGrammar = ''
+    // customerUpcomingBookings = currentCustomer.formatBookings(apiRooms)
+    customerUpcomingBookings.forEach((booking) => {
+        if(booking.numBeds === 1){
+            bedGrammar = 'Bed'
+        }
+        else{
+            bedGrammar = 'Beds'
+        }
+        upcomingBookingsList.innerHTML += 
+        `<article class="future-booking-item-container">
+        <figure class="calendar-container">
+          <img class="calendar-img" src="./images/calendar.png" alt="cartoon calendar icon">
+        </figure>
+        <article class="future-text-item-container">
+          <h4>${booking.date}</h4>
         </article>
       </article>`
     })
