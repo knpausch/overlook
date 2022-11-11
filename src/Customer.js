@@ -7,6 +7,13 @@ class Customer {
         this.pastBookings = []
     }
 
+    createBooking(bookingData){
+        console.log("ok cuzz")
+        return bookingData.map((currentBooking) => {
+            return new Booking(currentBooking)
+        })
+    }
+
     findCustomerBookings(bookingData){
         const date = new Date();
         let currentDay = date.getDate();
@@ -27,15 +34,19 @@ class Customer {
         // console.log("chargeMonth: ", chargeMonth)
         // console.log("chargeDay: ", chargeDay)
 
-
-
+        // bookingData.setDateValues()
 
         this.pastBookings = bookingData.filter((currentBooking) => {
         let chargeDate = currentBooking.date.split("/")
         chargeDate = Number(chargeDate.join(""))
-        // console.log("yeah: ", chargeDate)
             return currentBooking.userID === this.id && chargeDate < currentDate
         })
+
+        // this.pastBookings.sort((bookingA, bookingB) => {
+        //     let chargeDate = bookingB.date.split("/")
+        //     chargeDate = Number(chargeDate.join(""))
+        //     return 
+        // })
     }
 
     formatBookings(roomData){

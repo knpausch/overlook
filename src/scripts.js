@@ -29,6 +29,7 @@ let apiBookings
 let apiRooms
 let currentCustomer
 let customerPastBookings
+let allBookings
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -46,6 +47,7 @@ function fetchData(urls) {
             apiBookings = data[1].bookings
             apiRooms = data[2].rooms
             createCustomer(apiCustomer[0])
+
             displayAccountInfo()
         })
         .catch(err => console.log(err))
@@ -56,12 +58,14 @@ function createCustomer(data) {
     // currentCustomer = new Customer(randomUser)
     currentCustomer = new Customer(data)
     console.log(currentCustomer)
+    allBookings = currentCustomer.createBooking(apiBookings)
+    // console.log("lets try: ", allBookings)
     return currentCustomer
 }
 
 function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
-    currentCustomer.findCustomerBookings(apiBookings)
+    currentCustomer.findCustomerBookings(allBookings)
     displayPastBookings()
     displayTotalCost()
 }
