@@ -8,8 +8,33 @@ class Customer {
     }
 
     findCustomerBookings(bookingData){
+        const date = new Date();
+        let currentDay = date.getDate();
+        let currentMonth = date.getMonth() + 1;
+        let currentYear = date.getFullYear();
+        let currentDate = `${currentYear}${currentMonth}${currentDay}`;
+        currentDate = Number(currentDate)
+        console.log("current date: ", currentDate);
+        const chargeDate = bookingData[0].date.split("/")
+        let dateString = chargeDate.join("")
+        console.log("boom: ", Number(dateString))
+        // let chargeYear = chargeDate[0]
+        // let chargeMonth = chargeDate[1]
+        // let chargeDay = chargeDate[2]
+
+
+        // console.log("customerYear: ", chargeYear)
+        // console.log("chargeMonth: ", chargeMonth)
+        // console.log("chargeDay: ", chargeDay)
+
+
+
+
         this.pastBookings = bookingData.filter((currentBooking) => {
-            return currentBooking.userID === this.id
+        let chargeDate = currentBooking.date.split("/")
+        chargeDate = Number(chargeDate.join(""))
+        // console.log("yeah: ", chargeDate)
+            return currentBooking.userID === this.id && chargeDate < currentDate
         })
     }
 
