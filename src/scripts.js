@@ -61,23 +61,32 @@ function createCustomer(data) {
 
 function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
-
     currentCustomer.findCustomerBookings(apiBookings)
     displayPastBookings()
-    console.log("total: ", displayTotalCost())
+    displayTotalCost()
 }
 
 function displayPastBookings(){
+    let bedGrammar = ''
     customerPastBookings = currentCustomer.formatBookings(apiRooms)
     console.log("did it do it?: ", customerPastBookings)
     customerPastBookings.forEach((booking) => {
+        if(booking.numBeds === 1){
+            bedGrammar = 'Bed'
+        }
+        else{
+            bedGrammar = 'Beds'
+        }
         pastBookingsList.innerHTML += 
         `<article class="past-booking-item-container">
         <figure class="checkmark-container">
           <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
         </figure>
         <article class="past-text-item-container">
-          <h4 id="past-reservation-item-text"> ${booking.date} ${booking.roomType} ${booking.bidet} ${booking.bedSize} ${booking.numBeds}</h4>
+          <h4 id="past-reservation-item-text"> ${booking.date} 
+          ${capitalizeFirstLetter(booking.roomType)}, 
+          ${capitalizeFirstLetter(booking.bedSize)}, 
+          ${booking.numBeds} ${bedGrammar}</h4>
         </article>
       </article>`
     })
@@ -89,4 +98,8 @@ function displayTotalCost(){
         return total
     }, 0)
     amountText.innerText = "$"+cumlativeCharge.toFixed(2)
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }
