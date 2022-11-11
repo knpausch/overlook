@@ -16,7 +16,10 @@
       <h1>The Overlook Hotel ™</h1>
     </div>
     <div class="pageview-container">
-      <h2>Reservation View</h1>
+      <div class="view-info">
+        <h2 class="current-view-text">Reservation View</h2>
+        <h4 class="user-text" id="userText">User:</h4>
+      </div>
     </div>
   </header>
   <main class="main">
@@ -36,36 +39,14 @@
     <section class="reservation-view">
       <section class="past-bookings-container">
         <h2>Past Reservations</h2>
-        <article class="past-booking-item-container">
-          <figure class="checkmark-container">
-            <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
-          </figure>
-          <article class="past-text-item-container">
-            <h4>Date, king bed, single room, bidet, num beds</h4>
-          </article>
-        </article>
-        <article class="past-booking-item-container">
-          <figure class="checkmark-container">
-            <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
-          </figure>
-          <article class="past-text-item-container">
-            <h4>Date, king bed, single room, bidet, num beds</h4>
-          </article>
-        </article>
-        <article class="past-booking-item-container">
-          <figure class="checkmark-container">
-            <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
-          </figure>
-          <article class="past-text-item-container">
-            <h4>Date, king bed, single room, bidet, num beds</h4>
-          </article>
-        </article>
+        <section class="past-reservations-datalist" id="pastReservationsDatalist">
+        </section>
       </section>
       <section class="middle-content">
         <img class="relax-img" src="./images/relax.jpg" alt="relaxing dinner table next to the window">
         <article class="total-cost-container">
           <h4 class="total-cost-text">Total Cost:</h4>
-          <h5 class="amount-text">$156.84</h5>
+          <h5 class="amount-text" id="amountText">$156.84</h5>
         </article>
         <article class="to-booking-view-container">
           <h4 class="book-your-stay-text">Book Your Stay Today!</h4>
@@ -74,22 +55,8 @@
       </section>
       <section class="future-bookings-container">
         <h2>Upcoming Reservations</h2>
-        <article class="future-booking-item-container">
-          <figure class="calendar-container">
-            <img class="calendar-img" src="./images/calendar.png" alt="cartoon calendar icon">
-          </figure>
-          <article class="future-text-item-container">
-            <h4>Date, king bed, single room, bidet, num beds</h4>
-          </article>
-        </article>
-        <article class="future-booking-item-container">
-          <figure class="calendar-container">
-            <img class="calendar-img" src="./images/calendar.png" alt="cartoon calendar icon">
-          </figure>
-          <article class="future-text-item-container">
-            <h4>Date, king bed, single room, bidet, num beds</h4>
-          </article>
-        </article>
+        <section class="upcoming-reservations-datalist" id="upcomingReservationsDatalist">
+        </section>
       </section>
     </section>
     <!-- BOOKING VIEW -->
