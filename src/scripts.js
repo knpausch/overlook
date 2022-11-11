@@ -115,11 +115,9 @@ function displayPastBookings(){
 }
 
 function displayUpcomingBookings(){
-    console.log("upcoming: ", customerUpcomingBookings)
     let bedGrammar = ''
     let bidetStatus = ''
     let formatedUpcomingBookings = formatReservationInfo(customerUpcomingBookings)
-    console.log("eee: ", formatedUpcomingBookings)
     formatedUpcomingBookings.forEach((booking) => {
         if(booking.numBeds === 1){
             bedGrammar = 'Bed'
