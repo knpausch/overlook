@@ -16,6 +16,7 @@ import './css/styles.css';
 import getData from './apiCalls'
 import Customer from './Customer'
 import Room from './Room'
+import Booking from './Booking'
 
 //////////// API URLS ////////////
 const customersURL = 'http://localhost:3001/api/v1/customers'
@@ -41,11 +42,15 @@ function fetchData(urls) {
             apiCustomer = data[0]
             apiBookings = data[1]
             apiRooms = data[2]
+
             createCustomer(apiCustomer.customers[0])
             const myRoom = new Room(apiRooms.rooms[0])
             console.log("myRoom: ", myRoom)
+            const myBooking = new Booking(apiBookings.bookings[0])
+            console.log('booking: ', myBooking)
             // console.log("room: ", data[2].rooms[0])
             // console.log("bookings: ", data[1].bookings[0])
+
             displayAccountInfo()
         })
         .catch(err => console.log(err))
