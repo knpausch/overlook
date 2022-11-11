@@ -121,6 +121,7 @@ function displayUpcomingBookings(){
     let bedGrammar = ''
     let bidetStatus = ''
     let formatedUpcomingBookings = formatReservationInfo(customerUpcomingBookings)
+    console.log("eee: ", formatedUpcomingBookings)
     formatedUpcomingBookings.forEach((booking) => {
         if(booking.numBeds === 1){
             bedGrammar = 'Bed'
@@ -171,21 +172,18 @@ function formatReservationInfo(reservationList){
         let customerInfo = {}
         customerInfo.date = currentBooking.date
         customerInfo.id = currentBooking.id
-
+        customerInfo.numberedDate = currentBooking.numberedDate
         const roomInfo = allRooms.find((currentRoom) => {
             return currentRoom.roomNumber === currentBooking.roomNumber
         })
-
         customerInfo.roomType = roomInfo.roomType
         customerInfo.bidet = roomInfo.bidet
         customerInfo.bedSize = roomInfo.bedSize
         customerInfo.numBeds = roomInfo.numBeds
         customerInfo.costPerNight = roomInfo.costPerNight
-
         return customerInfo
     })
-    return formatedInfo
+    return formatedInfo.sort((a, b) => {
+        return a.numberedDate - b.numberedDate
+    })
 }
-
-//TO DO:
-//sort date in descending order (past and upcoming reservations)
