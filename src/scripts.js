@@ -83,11 +83,9 @@ function displayAccountInfo(){
 function gatherUsersAccountInfo(){
     currentCustomer.findPastBookings(allBookings)
     customerPastBookings = currentCustomer.pastBookings
-    // console.log("past bookings: ", customerPastBookings)
 
     currentCustomer.findUpcomingBookings(allBookings)
     customerUpcomingBookings = currentCustomer.upcomingBookings
-    // console.log("upcomming bookings: ", customerUpcomingBookings)
 }
 
 function displayPastBookings(){

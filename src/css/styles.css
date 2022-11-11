@@ -303,32 +303,3 @@ body {
 .lobby-img, .hotel-img{
   height: 58vh;
 }
-
-/******** Placeholders ********/
-.place-holder1{
-  height: 90px;
-  width: 90px;
-  background-color: grey;
-  border-style: solid;
-}
-
-.place-holder2{
-  height: 300px;
-  width: 200px;
-  background-color: grey;
-  border-style: solid;
-}
-
-.place-holder3{
-  height: 25px;
-  width: 25px;
-  background-color: grey;
-  border-style: solid;
-}
-
-.place-holder4{
-  height: 600px;
-  width: 1300px;
-  background-color: grey;
-  border-style: solid;
-}
