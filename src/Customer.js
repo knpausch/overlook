@@ -7,13 +7,13 @@ class Customer {
         this.pastBookings = []
     }
 
-    findMyBookings(bookingData){
+    findCustomerBookings(bookingData){
         this.pastBookings = bookingData.filter((currentBooking) => {
             return currentBooking.userID === this.id
         })
     }
 
-    formatMyBookings(roomData){
+    formatBookings(roomData){
         return this.pastBookings.map((currentBooking) => {
             let customerInfo = {}
             customerInfo.date = currentBooking.date

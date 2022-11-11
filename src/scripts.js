@@ -28,10 +28,12 @@ let apiCustomer
 let apiBookings
 let apiRooms
 let currentCustomer
+let customerPastBookings
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
 const pastBookingsList = document.querySelector('#pastReservationsDatalist')
+const amountText = document.querySelector('#amountText')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -58,24 +60,33 @@ function createCustomer(data) {
 }
 
 function displayAccountInfo(){
-    currentUser.innerText = "User: " + currentCustomer.name
+    currentUser.innerText = currentCustomer.name +"'s account"
 
-    currentCustomer.findMyBookings(apiBookings)
+    currentCustomer.findCustomerBookings(apiBookings)
     displayPastBookings()
+    console.log("total: ", displayTotalCost())
 }
 
 function displayPastBookings(){
-    const formattedPastBookingsList = currentCustomer.formatMyBookings(apiRooms)
-    console.log("did it do it?: ", formattedPastBookingsList)
-    formattedPastBookingsList.forEach((currentPastBooking) => {
+    customerPastBookings = currentCustomer.formatBookings(apiRooms)
+    console.log("did it do it?: ", customerPastBookings)
+    customerPastBookings.forEach((booking) => {
         pastBookingsList.innerHTML += 
         `<article class="past-booking-item-container">
         <figure class="checkmark-container">
           <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
         </figure>
         <article class="past-text-item-container">
-          <h4 id="past-reservation-item-text"> ${currentPastBooking.date} ${currentPastBooking.roomType} ${currentPastBooking.bedSize}</h4>
+          <h4 id="past-reservation-item-text"> ${booking.date} ${booking.roomType} ${booking.bidet} ${booking.bedSize} ${booking.numBeds}</h4>
         </article>
       </article>`
     })
+}
+
+function displayTotalCost(){
+    let cumlativeCharge = customerPastBookings.reduce((total, booking) => {
+        total += booking.costPerNight
+        return total
+    }, 0)
+    amountText.innerText = "$"+cumlativeCharge.toFixed(2)
 }
