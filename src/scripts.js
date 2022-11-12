@@ -46,12 +46,15 @@ const bookingPage = document.querySelector('#bookingView')
 const reservationViewButton = document.querySelector('#reservationViewButton')
 const currentViewText = document.querySelector('#currentViewText')
 const bookingControlsContainer = document.querySelector('#bookingControlsContainer')
+const requestedDate = document.querySelector('#requestedDate')
+const submitDateButton = document.querySelector('#submitDateButton')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
 bookingViewButton.addEventListener('click', showbookingView)
 bookingControlsContainer.addEventListener('click', stopRefreshing)
 reservationViewButton.addEventListener('click', showReservationsView)
+submitDateButton.addEventListener('click', getRequestedDate)
 
 //////////// FUNCTIONS ////////////
 function fetchData(urls) {
@@ -184,8 +187,9 @@ function showReservationsView(e){
     bookingPage.className = "booking-view hidden"
 }
 
-function stopRefreshing(e){
-    e.preventDefault()
+function getRequestedDate(){
+    console.log("hi son: ", requestedDate.value)
+
 }
 
 //////////// HELPER FUNCTIONS ////////////
@@ -212,4 +216,8 @@ function formatReservationInfo(reservationList){
     return formatedInfo.sort((a, b) => {
         return a.numberedDate - b.numberedDate
     })
+}
+
+function stopRefreshing(e){
+    e.preventDefault()
 }
