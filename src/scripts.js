@@ -34,6 +34,7 @@ let allBookings
 let allCustomerBookings
 let allRooms
 let currentView
+let customerRequestedDate
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -175,42 +176,9 @@ function displayTotalCost(){
 }
 
 function showbookingView(){
-    let bedGrammar = ''
-    let bidetStatus = ''
     currentViewText.innerText = "Booking View"
     reservationPage.className = "reservation-view hidden"
     bookingPage.className = "booking-view"
-
-    console.log(allRooms)
-
-    allRooms.forEach((currentRoom) => {
-        if(currentRoom.numBeds === 1){
-            bedGrammar = 'Bed'
-        }
-        else{
-            bedGrammar = 'Beds'
-        }
-        if(currentRoom.bidet){
-            bidetStatus = "Yes"
-        }
-        else{
-            bidetStatus = "No"
-        }
-        availableRoomsDatalist.innerHTML += 
-        `<article class="search-result-item-container">
-            <figure class="bed-container">
-              <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
-            </figure>
-            <article class="text-search-result-item-container">
-              <h4 class="text-search-result-item">
-              ${capitalizeFirstLetter(currentRoom.roomType)}, 
-              ${capitalizeFirstLetter(currentRoom.bedSize)},
-              ${currentRoom.numBeds} ${bedGrammar},
-              Bidet: ${bidetStatus}</h4>
-            </article>
-            <button class="book-button">Book</button>
-          </article>`
-    })
 }
 
 function showReservationsView(){
@@ -221,12 +189,53 @@ function showReservationsView(){
 }
 
 function getRequestedDate(){
-    console.log("hi son: ", requestedDate.value)
+    customerRequestedDate = requestedDate.value.split("-")
+    customerRequestedDate = customerRequestedDate.join("/")  
 
+    //3 of them occupied on this date:
+    //  let testDate = "2023-12-14"
+
+    const occupiedList = allBookings.filter((currentBooking) => {
+        return currentBooking.date === customerRequestedDate
+    })
+    console.log("occupied rooms: ", occupiedList)
+    showAvailableRooms(occupiedList)
 }
 
-function showAvailableRooms(){
-    console.log("im ready")
+function showAvailableRooms(occupiedList){
+    let bedGrammar = ''
+    let bidetStatus = ''
+
+    if(occupiedList.length === 0){
+        allRooms.forEach((currentRoom) => {
+            if(currentRoom.numBeds === 1){
+                bedGrammar = 'Bed'
+            }
+            else{
+                bedGrammar = 'Beds'
+            }
+            if(currentRoom.bidet){
+                bidetStatus = "Yes"
+            }
+            else{
+                bidetStatus = "No"
+            }
+            availableRoomsDatalist.innerHTML += 
+            `<article class="search-result-item-container">
+                <figure class="bed-container">
+                  <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
+                </figure>
+                <article class="text-search-result-item-container">
+                  <h4 class="text-search-result-item">
+                  ${capitalizeFirstLetter(currentRoom.roomType)}, 
+                  ${capitalizeFirstLetter(currentRoom.bedSize)},
+                  ${currentRoom.numBeds} ${bedGrammar},
+                  Bidet: ${bidetStatus}</h4>
+                </article>
+                <button class="book-button">Book</button>
+              </article>`
+        })
+    }
 }
 
 //////////// HELPER FUNCTIONS ////////////
