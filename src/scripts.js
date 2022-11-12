@@ -191,6 +191,7 @@ function showReservationsView(){
 }
 
 function getRequestedDate(){
+    availableRoomsDatalist.innerHTML = "" 
     customerRequestedDate = requestedDate.value.split("-")
     customerRequestedDate = customerRequestedDate.join("/")  
     const occupiedList = allBookings.filter((currentBooking) => {
