@@ -208,37 +208,40 @@ function getRequestedDate(){
 function showAvailableRooms(occupiedList){
     let bedGrammar = ''
     let bidetStatus = ''
+    let availableRooms = []
 
     if(occupiedList.length === 0){
-        allRooms.forEach((currentRoom) => {
-            if(currentRoom.numBeds === 1){
-                bedGrammar = 'Bed'
-            }
-            else{
-                bedGrammar = 'Beds'
-            }
-            if(currentRoom.bidet){
-                bidetStatus = "Yes"
-            }
-            else{
-                bidetStatus = "No"
-            }
-            availableRoomsDatalist.innerHTML += 
-            `<article class="search-result-item-container">
-                <figure class="bed-container">
-                  <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
-                </figure>
-                <article class="text-search-result-item-container">
-                  <h4 class="text-search-result-item">
-                  ${capitalizeFirstLetter(currentRoom.roomType)}, 
-                  ${capitalizeFirstLetter(currentRoom.bedSize)},
-                  ${currentRoom.numBeds} ${bedGrammar},
-                  Bidet: ${bidetStatus}</h4>
-                </article>
-                <button class="book-button">Book</button>
-              </article>`
-        })
+        availableRooms = allRooms
     }
+    
+    availableRooms.forEach((currentRoom) => {
+        if(currentRoom.numBeds === 1){
+            bedGrammar = 'Bed'
+        }
+        else{
+            bedGrammar = 'Beds'
+        }
+        if(currentRoom.bidet){
+            bidetStatus = "Yes"
+        }
+        else{
+            bidetStatus = "No"
+        }
+        availableRoomsDatalist.innerHTML += 
+        `<article class="search-result-item-container">
+            <figure class="bed-container">
+              <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
+            </figure>
+            <article class="text-search-result-item-container">
+              <h4 class="text-search-result-item">
+              ${capitalizeFirstLetter(currentRoom.roomType)}, 
+              ${capitalizeFirstLetter(currentRoom.bedSize)},
+              ${currentRoom.numBeds} ${bedGrammar},
+              Bidet: ${bidetStatus}</h4>
+            </article>
+            <button class="book-button">Book</button>
+          </article>`
+    })
 }
 
 //////////// HELPER FUNCTIONS ////////////
