@@ -31,7 +31,6 @@ let currentCustomer
 let customerPastBookings
 let customerUpcomingBookings
 let allBookings
-let allCustomerBookings
 let allRooms
 let currentView
 let customerRequestedDate
@@ -194,10 +193,6 @@ function showReservationsView(){
 function getRequestedDate(){
     customerRequestedDate = requestedDate.value.split("-")
     customerRequestedDate = customerRequestedDate.join("/")  
-
-    //3 of them occupied on this date:
-    //  let testDate = "2023-12-14"
-
     const occupiedList = allBookings.filter((currentBooking) => {
         return currentBooking.date === customerRequestedDate
     })
@@ -206,6 +201,8 @@ function getRequestedDate(){
 }
 
 function showAvailableRooms(occupiedList){
+    //3 of them occupied on this date: 2023-12-14
+
     let bedGrammar = ''
     let bidetStatus = ''
     let availableRooms = []
@@ -213,7 +210,7 @@ function showAvailableRooms(occupiedList){
     if(occupiedList.length === 0){
         availableRooms = allRooms
     }
-    
+
     availableRooms.forEach((currentRoom) => {
         if(currentRoom.numBeds === 1){
             bedGrammar = 'Bed'
