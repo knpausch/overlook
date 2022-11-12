@@ -182,6 +182,9 @@ function showbookingView(){
 }
 
 function showReservationsView(){
+    availableRoomsDatalist.innerHTML = "" 
+    requestedDate.value = ""
+
     currentView = 'reservationView'
     currentViewText.innerText = "Reservation View"
     reservationPage.className = "reservation-view"
