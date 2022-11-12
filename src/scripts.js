@@ -45,10 +45,12 @@ const reservationPage = document.querySelector('#reservationView')
 const bookingPage = document.querySelector('#bookingView')
 const reservationViewButton = document.querySelector('#reservationViewButton')
 const currentViewText = document.querySelector('#currentViewText')
+const bookingControlsContainer = document.querySelector('#bookingControlsContainer')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
 bookingViewButton.addEventListener('click', showbookingView)
+bookingControlsContainer.addEventListener('click', stopRefreshing)
 reservationViewButton.addEventListener('click', showReservationsView)
 
 //////////// FUNCTIONS ////////////
@@ -58,17 +60,18 @@ function fetchData(urls) {
             apiCustomer = data[0].customers
             apiBookings = data[1].bookings
             apiRooms = data[2].rooms
-            createCustomer(apiCustomer[0])
+            createCustomer(apiCustomer)
             createRooms(apiRooms)
             displayAccountInfo()
+            console.log("duh hell?")
         })
         .catch(err => console.log(err))
 }
 
 function createCustomer(data) {
-    // const randomUser = data[Math.floor(Math.random() * data.length)]
-    // currentCustomer = new Customer(randomUser)
-    currentCustomer = new Customer(data)
+    const randomUser = data[Math.floor(Math.random() * data.length)]
+    currentCustomer = new Customer(randomUser)
+    // currentCustomer = new Customer(data)
     console.log(currentCustomer)
     allBookings = currentCustomer.createBooking(apiBookings)
     return currentCustomer
@@ -168,18 +171,21 @@ function displayTotalCost(){
     amountText.innerText = "$"+cumlativeCharge.toFixed(2)
 }
 
-function showbookingView(){
-    currentView = 'bookingView'
+function showbookingView(e){
     currentViewText.innerText = "Booking View"
     reservationPage.className = "reservation-view hidden"
     bookingPage.className = "booking-view"
 }
 
-function showReservationsView(){
+function showReservationsView(e){
     currentView = 'reservationView'
     currentViewText.innerText = "Reservation View"
     reservationPage.className = "reservation-view"
     bookingPage.className = "booking-view hidden"
+}
+
+function stopRefreshing(e){
+    e.preventDefault()
 }
 
 //////////// HELPER FUNCTIONS ////////////
