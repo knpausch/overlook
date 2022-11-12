@@ -2,6 +2,10 @@
   font-family: 'Prata', serif;
 }
 
+button{
+  cursor: pointer;
+}
+
 body {
   background-color: #C04646;
   height: 100vh;
@@ -63,7 +67,7 @@ body {
 
 /******** Dashboard View ********/
 
-.past-bookings-container, .future-bookings-container{
+.past-bookings-container, .future-bookings-container, .search-results-container{
   max-height:100%;
   overflow:auto;
 }

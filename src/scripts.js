@@ -31,17 +31,31 @@ let currentCustomer
 let customerPastBookings
 let customerUpcomingBookings
 let allBookings
-let allCustomerBookings
 let allRooms
+let currentView
+let customerRequestedDate
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
 const pastBookingsList = document.querySelector('#pastReservationsDatalist')
 const amountText = document.querySelector('#amountText')
 const upcomingBookingsList = document.querySelector('#upcomingReservationsDatalist')
+const bookingViewButton = document.querySelector('#bookingViewButton')
+const reservationPage = document.querySelector('#reservationView')
+const bookingPage = document.querySelector('#bookingView')
+const reservationViewButton = document.querySelector('#reservationViewButton')
+const currentViewText = document.querySelector('#currentViewText')
+const bookingControlsContainer = document.querySelector('#bookingControlsContainer')
+const requestedDate = document.querySelector('#requestedDate')
+const submitDateButton = document.querySelector('#submitDateButton')
+const availableRoomsDatalist = document.querySelector('#availableRoomsDatalist')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
+bookingViewButton.addEventListener('click', showbookingView)
+bookingControlsContainer.addEventListener('click', stopRefreshing)
+reservationViewButton.addEventListener('click', showReservationsView)
+submitDateButton.addEventListener('click', getRequestedDate)
 
 //////////// FUNCTIONS ////////////
 function fetchData(urls) {
@@ -50,7 +64,7 @@ function fetchData(urls) {
             apiCustomer = data[0].customers
             apiBookings = data[1].bookings
             apiRooms = data[2].rooms
-            createCustomer(apiCustomer[0])
+            createCustomer(apiCustomer)
             createRooms(apiRooms)
             displayAccountInfo()
         })
@@ -58,9 +72,9 @@ function fetchData(urls) {
 }
 
 function createCustomer(data) {
-    // const randomUser = data[Math.floor(Math.random() * data.length)]
-    // currentCustomer = new Customer(randomUser)
-    currentCustomer = new Customer(data)
+    const randomUser = data[Math.floor(Math.random() * data.length)]
+    currentCustomer = new Customer(randomUser)
+    // currentCustomer = new Customer(data)
     console.log(currentCustomer)
     allBookings = currentCustomer.createBooking(apiBookings)
     return currentCustomer
@@ -74,6 +88,7 @@ function createRooms(data){
 
 function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
+    currentView = 'reservationView'
     gatherUsersAccountInfo()
     displayPastBookings()
     displayUpcomingBookings()
@@ -159,6 +174,75 @@ function displayTotalCost(){
     amountText.innerText = "$"+cumlativeCharge.toFixed(2)
 }
 
+function showbookingView(){
+    currentViewText.innerText = "Booking View"
+    reservationPage.className = "reservation-view hidden"
+    bookingPage.className = "booking-view"
+}
+
+function showReservationsView(){
+    availableRoomsDatalist.innerHTML = "" 
+    requestedDate.value = ""
+
+    currentView = 'reservationView'
+    currentViewText.innerText = "Reservation View"
+    reservationPage.className = "reservation-view"
+    bookingPage.className = "booking-view hidden"
+}
+
+function getRequestedDate(){
+    availableRoomsDatalist.innerHTML = "" 
+    customerRequestedDate = requestedDate.value.split("-")
+    customerRequestedDate = customerRequestedDate.join("/")  
+    const occupiedList = allBookings.filter((currentBooking) => {
+        return currentBooking.date === customerRequestedDate
+    })
+    console.log("occupied rooms: ", occupiedList)
+    showAvailableRooms(occupiedList)
+}
+
+function showAvailableRooms(occupiedList){
+    //3 of them occupied on this date: 2023-12-14
+
+    let bedGrammar = ''
+    let bidetStatus = ''
+    let availableRooms = []
+
+    if(occupiedList.length === 0){
+        availableRooms = allRooms
+    }
+
+    availableRooms.forEach((currentRoom) => {
+        if(currentRoom.numBeds === 1){
+            bedGrammar = 'Bed'
+        }
+        else{
+            bedGrammar = 'Beds'
+        }
+        if(currentRoom.bidet){
+            bidetStatus = "Yes"
+        }
+        else{
+            bidetStatus = "No"
+        }
+        availableRoomsDatalist.innerHTML += 
+        `<article class="search-result-item-container">
+            <figure class="bed-container">
+              <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
+            </figure>
+            <article class="text-search-result-item-container">
+              <h4 class="text-search-result-item">
+              ${capitalizeFirstLetter(currentRoom.roomType)}, 
+              ${capitalizeFirstLetter(currentRoom.bedSize)},
+              ${currentRoom.numBeds} ${bedGrammar},
+              Bidet: ${bidetStatus}</h4>
+            </article>
+            <button class="book-button">Book</button>
+          </article>`
+    })
+}
+
+//////////// HELPER FUNCTIONS ////////////
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
@@ -182,4 +266,8 @@ function formatReservationInfo(reservationList){
     return formatedInfo.sort((a, b) => {
         return a.numberedDate - b.numberedDate
     })
+}
+
+function stopRefreshing(e){
+    e.preventDefault()
 }
