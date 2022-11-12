@@ -33,15 +33,23 @@ let customerUpcomingBookings
 let allBookings
 let allCustomerBookings
 let allRooms
+let currentView
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
 const pastBookingsList = document.querySelector('#pastReservationsDatalist')
 const amountText = document.querySelector('#amountText')
 const upcomingBookingsList = document.querySelector('#upcomingReservationsDatalist')
+const bookingViewButton = document.querySelector('#bookingViewButton')
+const reservationPage = document.querySelector('#reservationView')
+const bookingPage = document.querySelector('#bookingView')
+const reservationViewButton = document.querySelector('#reservationViewButton')
+const currentViewText = document.querySelector('#currentViewText')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
+bookingViewButton.addEventListener('click', showbookingView)
+reservationViewButton.addEventListener('click', showReservationsView)
 
 //////////// FUNCTIONS ////////////
 function fetchData(urls) {
@@ -74,6 +82,7 @@ function createRooms(data){
 
 function displayAccountInfo(){
     currentUser.innerText = currentCustomer.name +"'s account"
+    currentView = 'reservationView'
     gatherUsersAccountInfo()
     displayPastBookings()
     displayUpcomingBookings()
@@ -159,6 +168,21 @@ function displayTotalCost(){
     amountText.innerText = "$"+cumlativeCharge.toFixed(2)
 }
 
+function showbookingView(){
+    currentView = 'bookingView'
+    currentViewText.innerText = "Booking View"
+    reservationPage.className = "reservation-view hidden"
+    bookingPage.className = "booking-view"
+}
+
+function showReservationsView(){
+    currentView = 'reservationView'
+    currentViewText.innerText = "Reservation View"
+    reservationPage.className = "reservation-view"
+    bookingPage.className = "booking-view hidden"
+}
+
+//////////// HELPER FUNCTIONS ////////////
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }

@@ -17,7 +17,7 @@
     </div>
     <div class="pageview-container">
       <div class="view-info">
-        <h2 class="current-view-text">Reservation View</h2>
+        <h2 class="current-view-text" id="currentViewText">Reservation View</h2>
         <h4 class="user-text" id="userText">User:</h4>
       </div>
     </div>
@@ -36,7 +36,7 @@
       </form>
     </section>
     <!-- RESERVATION VIEW -->
-    <section class="reservation-view">
+    <section class="reservation-view" id="reservationView">
       <section class="past-bookings-container">
         <h2>Past Reservations</h2>
         <section class="past-reservations-datalist" id="pastReservationsDatalist">
@@ -50,7 +50,7 @@
         </article>
         <article class="to-booking-view-container">
           <h4 class="book-your-stay-text">Book Your Stay Today!</h4>
-          <button class="booking-view-button">Book a Room</button>
+          <button class="booking-view-button" id="bookingViewButton">Book a Room</button>
         </article>
       </section>
       <section class="future-bookings-container">
@@ -60,7 +60,7 @@
       </section>
     </section>
     <!-- BOOKING VIEW -->
-    <section class="booking-view hidden">
+    <section class="booking-view hidden" id="bookingView">
       <section class="booking-controls-container">
         <form class="date-input-container">
           <h2 class="select-date-text">Select a Date</h2>
@@ -84,14 +84,14 @@
         </form>
         <form class="room-filter-container">
           <h2 class="view-reservations-text">View Reservations</h2>
-          <button class = "reservation-view-button">Reservation View</button>
+          <button class = "reservation-view-button" id="reservationViewButton">Reservation View</button>
         </form>
       </section>
       <section class="filter-settings-container">
       </section>
       <article class="search-results-container">
         <!-- RESULTS FOUND -->
-        <section class="room-results hidden">
+        <section class="room-results">
           <h2 class="available-rooms-text">Available Rooms</h2>
           <article class="search-result-item-container">
             <figure class="bed-container">
