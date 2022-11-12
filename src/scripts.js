@@ -48,6 +48,7 @@ const currentViewText = document.querySelector('#currentViewText')
 const bookingControlsContainer = document.querySelector('#bookingControlsContainer')
 const requestedDate = document.querySelector('#requestedDate')
 const submitDateButton = document.querySelector('#submitDateButton')
+const availableRoomsDatalist = document.querySelector('#availableRoomsDatalist')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -66,7 +67,6 @@ function fetchData(urls) {
             createCustomer(apiCustomer)
             createRooms(apiRooms)
             displayAccountInfo()
-            console.log("duh hell?")
         })
         .catch(err => console.log(err))
 }
@@ -174,13 +174,46 @@ function displayTotalCost(){
     amountText.innerText = "$"+cumlativeCharge.toFixed(2)
 }
 
-function showbookingView(e){
+function showbookingView(){
+    let bedGrammar = ''
+    let bidetStatus = ''
     currentViewText.innerText = "Booking View"
     reservationPage.className = "reservation-view hidden"
     bookingPage.className = "booking-view"
+
+    console.log(allRooms)
+
+    allRooms.forEach((currentRoom) => {
+        if(currentRoom.numBeds === 1){
+            bedGrammar = 'Bed'
+        }
+        else{
+            bedGrammar = 'Beds'
+        }
+        if(currentRoom.bidet){
+            bidetStatus = "Yes"
+        }
+        else{
+            bidetStatus = "No"
+        }
+        availableRoomsDatalist.innerHTML += 
+        `<article class="search-result-item-container">
+            <figure class="bed-container">
+              <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
+            </figure>
+            <article class="text-search-result-item-container">
+              <h4 class="text-search-result-item">
+              ${capitalizeFirstLetter(currentRoom.roomType)}, 
+              ${capitalizeFirstLetter(currentRoom.bedSize)},
+              ${currentRoom.numBeds} ${bedGrammar},
+              Bidet: ${bidetStatus}</h4>
+            </article>
+            <button class="book-button">Book</button>
+          </article>`
+    })
 }
 
-function showReservationsView(e){
+function showReservationsView(){
     currentView = 'reservationView'
     currentViewText.innerText = "Reservation View"
     reservationPage.className = "reservation-view"
@@ -190,6 +223,10 @@ function showReservationsView(e){
 function getRequestedDate(){
     console.log("hi son: ", requestedDate.value)
 
+}
+
+function showAvailableRooms(){
+    console.log("im ready")
 }
 
 //////////// HELPER FUNCTIONS ////////////
