@@ -190,6 +190,7 @@ function showbookingView(){
 function showReservationsView(){
     availableRoomsDatalist.innerHTML = "" 
     requestedDate.value = ""
+    dropdownMenu.value = "select room"
 
     currentView = 'reservationView'
     currentViewText.innerText = "Reservation View"
