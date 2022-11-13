@@ -89,7 +89,6 @@ function fetchData(urls) {
 function createCustomer(data) {
     const randomUser = data[Math.floor(Math.random() * data.length)]
     currentCustomer = new Customer(randomUser)
-    console.log(currentCustomer)
     allBookings = currentCustomer.createBooking(apiBookings)
     return currentCustomer
 }
@@ -212,12 +211,8 @@ function showReservationsView(){
 
 function getRequestedDate(){
     availableRoomsDatalist.innerHTML = "" 
-    console.log("user gave us", requestedDate.value)
     customerRequestedDate = requestedDate.value.split("-")
     customerRequestedDate = Number(customerRequestedDate.join(""))
-    console.log("formatted date: ", customerRequestedDate)
-    console.log("current date: ", currentDate)
-
     if(requestedDate.value === ""){
         roomResults.className = "room-results hidden"
         badInput.className = "bad-input"
@@ -232,7 +227,6 @@ function getRequestedDate(){
         roomResults.className = "room-results"
         badInput.className = "bad-input hidden"
         availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
-        console.log("available rooms: ", availableRooms)
         showAvailableRooms(availableRooms)
     }
 }
@@ -251,7 +245,6 @@ function showAvailableRooms(availableRooms){
         let bedGrammar = ''
         let bidetStatus = ''
 
-        console.log("hi grandpa: ",availableRooms)
         availableRooms.forEach((currentRoom) => {
             if(currentRoom.numBeds === 1){
                 bedGrammar = 'Bed'
@@ -289,7 +282,6 @@ function showApologyMesssage(){
 }
 
 function displayFilteredList(){
-    console.log('yee: ', availableRooms)
     if(dropdownMenu.value === "select room"){
         roomResults.className = "room-results hidden"
         badInput.className = "bad-input"
@@ -317,21 +309,12 @@ function displayFilteredList(){
 }
 
 function addBooking(event){
-    console.log("are ya winnin son?")
-
     if(event.target.classList.contains("book-button")){
-        console.log("you hit a button fam")
         roomNumToBook = Number(event.target.id)
     }
-    console.log("id: ",currentCustomer.id)
-    console.log("date: ",customerRequestedDate)
-    console.log("you picked room: ", roomNumToBook)
-
     formatPostData(currentCustomer.id, customerRequestedDate, roomNumToBook)
-    console.log("post data: ", postData)
     savedBooking.className = "saved-booking"
     roomResults.className = "room-results hidden"
-
     updateReservations(postData)
 }
 
@@ -369,14 +352,9 @@ function updateReservations(formattedPostData){
 }
 
 function updateBookings(newData) {
-    console.log("old bookings: ", allBookings)
     allBookings = currentCustomer.createBooking(newData.bookings)
-    console.log("new bookings: ", allBookings)
-
-    console.log("customer's old bookings: ", customerUpcomingBookings)
     currentCustomer.findUpcomingBookings(allBookings)
     customerUpcomingBookings = currentCustomer.upcomingBookings
-    console.log("customer's updated bookings: ", customerUpcomingBookings)
     displayUpcomingBookings()
     displayTotalCost()
 }
