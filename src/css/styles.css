@@ -2,6 +2,12 @@
   font-family: 'Prata', serif;
 }
 
+button:focus, .date-field:focus, .dropdown-menu:focus{
+  outline-width: 4px;
+  outline-style: solid;
+  outline-color: #3c40c6;
+}
+
 button{
   cursor: pointer;
 }
@@ -54,6 +60,7 @@ body {
 .user-text{
   margin: 0;
   margin-bottom: 19px;
+  font-size: 16px;
 }
 
 /******** Main ********/
@@ -80,6 +87,10 @@ body {
   background-color: #FFFDFD;
   height: 90%;
   width: 95%;
+}
+
+.past-reservation-item-text, .upcomming-reservation-item-text{
+  font-size: 16px;
 }
 
 .past-bookings-container, .future-bookings-container, 
@@ -154,7 +165,12 @@ body {
   text-align: center;
 }
 
-.select-date-text, .select-room-text, .view-reservations-text{
+.select-room-text, .select-date-text{
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+.view-reservations-text{
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -211,6 +227,10 @@ body {
   font-size: 18px;
 }
 
+.date-field, .dropdown-menu{
+  margin-right: 4px;
+}
+
 .bed-container, .checkmark-container, .calendar-container{
   margin: 0;
   width: 10%;
@@ -220,7 +240,6 @@ body {
 .future-text-item-container{
   text-align: center;
   width: 85%;
-  /* width: 70%; */
 }
 
 .text-search-result-item{

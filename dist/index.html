@@ -18,7 +18,7 @@
     <div class="pageview-container">
       <div class="view-info">
         <h2 class="current-view-text" id="currentViewText">Reservation View</h2>
-        <h4 class="user-text" id="userText">User:</h4>
+        <h2 class="user-text" id="userText">User:</h2>
       </div>
     </div>
   </header>
@@ -63,14 +63,14 @@
     <section class="booking-view hidden" id="bookingView">
       <section class="booking-controls-container" id="bookingControlsContainer">
         <form class="date-input-container">
-          <h2 class="select-date-text">Select a Date</h2>
+          <label class ="select-date-text" for="requestedDate">Select a Date</label><br>
           <menu class="field-and-submit">
             <input class="date-field" type="date" id="requestedDate" name="requestedDate">
             <button class="submit-date-button" id="submitDateButton">Submit</button>
           </menu>
         </form>
         <form class="room-filter-container">
-          <h2 class="select-room-text">Select Room Type</h2>
+          <label class ="select-room-text" for="dropdownMenu">Select Room Type</label><br>
           <div class="dropdown-and-search">
             <select class="dropdown-menu" name="room-types" id="dropdownMenu">
               <option value="select room">Select Room</option>
