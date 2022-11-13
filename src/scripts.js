@@ -132,11 +132,11 @@ function displayPastBookings(){
           <img class="check-img" src="./images/perspective.png" alt="green checkmark icon">
         </figure>
         <article class="past-text-item-container">
-          <h4 id="past-reservation-item-text">
+          <h3 class="past-reservation-item-text">
           ${booking.date}, 
           ${capitalizeFirstLetter(booking.roomType)},
           ${capitalizeFirstLetter(booking.bedSize)},
-          ${booking.numBeds} ${bedGrammar}</h4>
+          ${booking.numBeds} ${bedGrammar}</h3>
         </article>
       </article>`
     })
@@ -166,12 +166,12 @@ function displayUpcomingBookings(){
           <img class="calendar-img" src="./images/calendar.png" alt="carton calendar icon">
         </figure>
         <article class="past-text-item-container">
-          <h4 id="past-reservation-item-text">
+          <h3 class="upcomming-reservation-item-text">
           ${booking.date}, 
           ${capitalizeFirstLetter(booking.roomType)},
           ${capitalizeFirstLetter(booking.bedSize)},
           ${booking.numBeds} ${bedGrammar},
-          Bidet: ${bidetStatus}</h4>
+          Bidet: ${bidetStatus}</h3>
         </article>
       </article>`
     })

@@ -54,6 +54,7 @@ body {
 .user-text{
   margin: 0;
   margin-bottom: 19px;
+  font-size: 16px;
 }
 
 /******** Main ********/
@@ -80,6 +81,10 @@ body {
   background-color: #FFFDFD;
   height: 90%;
   width: 95%;
+}
+
+.past-reservation-item-text, .upcomming-reservation-item-text{
+  font-size: 16px;
 }
 
 .past-bookings-container, .future-bookings-container, 
