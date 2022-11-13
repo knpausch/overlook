@@ -2,7 +2,7 @@
   font-family: 'Prata', serif;
 }
 
-button:focus{
+button:focus, .date-field:focus, .dropdown-menu:focus{
   outline-width: 4px;
   outline-style: solid;
   outline-color: #3c40c6;
@@ -225,6 +225,10 @@ body {
 .date-field{
   height: 50px;
   font-size: 18px;
+}
+
+.date-field, .dropdown-menu{
+  margin-right: 4px;
 }
 
 .bed-container, .checkmark-container, .calendar-container{
