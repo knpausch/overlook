@@ -2,6 +2,12 @@
   font-family: 'Prata', serif;
 }
 
+button:focus{
+  outline-width: 4px;
+  outline-style: solid;
+  outline-color: #3c40c6;
+}
+
 button{
   cursor: pointer;
 }
