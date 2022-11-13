@@ -12,27 +12,6 @@ class Booking{
         chargeDate = Number(chargeDate.join(""))
         this.numberedDate = chargeDate
     }
-
-    // checkBookingIsUpcoming(){
-    //     let chargeDate = this.date.split("/")
-    //     chargeDate = Number(chargeDate.join(""))
-    //     this.numberedDate = chargeDate
-
-    //     // this.formatDate()
-    //     const date = new Date()
-    //     let currentDay = date.getDate()
-    //     let currentMonth = date.getMonth() + 1
-    //     let currentYear = date.getFullYear()
-    //     let currentDate = `${currentYear}${currentMonth}${currentDay}`
-    //     currentDate = Number(currentDate)
-
-    //     if(this.numberedDate >= currentDate){
-    //         return true
-    //     }
-    //     else{
-    //         return false
-    //     }
-    // }
 }
 
 export default Booking
