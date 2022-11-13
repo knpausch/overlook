@@ -35,6 +35,7 @@ let allRooms
 let currentView
 let customerRequestedDate
 let availableRooms
+let filteredList
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -255,8 +256,15 @@ function showApologyMesssage(){
 }
 
 function displayFilteredList(){
-    console.log("ay boi: ", dropdownMenu.value)
+    filteredList = currentCustomer.filterByRoomType(dropdownMenu.value, availableRooms)
 
+    if(availableRooms.length > 0 && dropdownMenu.value != "select room" && filteredList.length > 0){
+        availableRoomsDatalist.innerHTML = "" 
+        showAvailableRooms(filteredList)
+    }
+    else{
+        showApologyMesssage()
+    }
 }
 
 //////////// HELPER FUNCTIONS ////////////

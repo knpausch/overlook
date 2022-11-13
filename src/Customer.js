@@ -49,9 +49,11 @@ class Customer {
           return openRooms
     }
 
-    // filterByRoomType(){
-
-    // }
+    filterByRoomType(givenRoomType, availableRooms){
+        return availableRooms.filter((currentRoom) => {
+            return currentRoom.roomType === givenRoomType
+        })
+    }
 }
 
 export default Customer
