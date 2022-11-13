@@ -34,6 +34,7 @@ let allBookings
 let allRooms
 let currentView
 let customerRequestedDate
+let availableRooms
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -193,24 +194,17 @@ function showReservationsView(){
 function getRequestedDate(){
     availableRoomsDatalist.innerHTML = "" 
     customerRequestedDate = requestedDate.value.split("-")
-    customerRequestedDate = customerRequestedDate.join("/")  
-    const occupiedList = allBookings.filter((currentBooking) => {
-        return currentBooking.date === customerRequestedDate
-    })
-    console.log("occupied rooms: ", occupiedList)
-    showAvailableRooms(occupiedList)
+    customerRequestedDate = customerRequestedDate.join("/") 
+
+    availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
+    console.log("available rooms: ", availableRooms)
+    showAvailableRooms(availableRooms)
 }
 
-function showAvailableRooms(occupiedList){
+function showAvailableRooms(availableRooms){
     //3 of them occupied on this date: 2023-12-14
-
     let bedGrammar = ''
     let bidetStatus = ''
-    let availableRooms = []
-
-    if(occupiedList.length === 0){
-        availableRooms = allRooms
-    }
 
     availableRooms.forEach((currentRoom) => {
         if(currentRoom.numBeds === 1){
