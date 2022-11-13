@@ -360,16 +360,25 @@ function updateReservations(formattedPostData){
         headers: { 'Content-Type': 'application/json' }
     })
         .then(response => response.json())
-        // .then(test =>
-        //     getData(bookingsURL))
+        .then(test => getData(bookingsURL))
         .then(data => {
             console.log(data)
-            // updateUser(data)
+            updateBookings(data)
             // addOrRemoveToPantry()
             // displayMissingIngr()
         })
         .catch(err => console.log('Fetch Error: ', err))
 }
+
+/////////////////WIP//////////////////////////
+function updateBookings(newData) {
+    console.log("old bookings: ", allBookings)
+    allBookings = currentCustomer.createBooking(newData.bookings)
+    console.log("new bookings: ", allBookings)
+}
+//////////////////////WIP ^///////////////////////
+
+
 
 //////////// HELPER FUNCTIONS ////////////
 function capitalizeFirstLetter(string) {
