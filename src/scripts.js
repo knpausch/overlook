@@ -36,6 +36,7 @@ let currentView
 let customerRequestedDate
 let availableRooms
 let filteredList
+let currentDate
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -55,6 +56,8 @@ const roomResults = document.querySelector('#roomResults')
 const noResults = document.querySelector('#noResults')
 const dropdownMenu = document.querySelector('#dropdownMenu')
 const submitFilterButton = document.querySelector('#submitFilterButton')
+const badInput = document.querySelector('#badInput')
+const badInputMessage = document.querySelector('#badInputMessage')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -74,6 +77,7 @@ function fetchData(urls) {
             createCustomer(apiCustomer)
             createRooms(apiRooms)
             displayAccountInfo()
+            setCurrentDate()
         })
         .catch(err => console.log(err))
 }
@@ -182,6 +186,8 @@ function displayTotalCost(){
 }
 
 function showbookingView(){
+    roomResults.className = "room-results"
+    noResults.className = "no-results hidden"
     currentViewText.innerText = "Booking View"
     reservationPage.className = "reservation-view hidden"
     bookingPage.className = "booking-view"
@@ -200,55 +206,74 @@ function showReservationsView(){
 
 function getRequestedDate(){
     availableRoomsDatalist.innerHTML = "" 
+    console.log("user gave us", requestedDate.value)
     customerRequestedDate = requestedDate.value.split("-")
-    customerRequestedDate = customerRequestedDate.join("/") 
+    customerRequestedDate = Number(customerRequestedDate.join(""))
+    console.log("formatted date: ", customerRequestedDate)
+    console.log("current date: ", currentDate)
 
-    availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
-    console.log("available rooms: ", availableRooms)
-
-    if(availableRooms.length != 0){
-        showAvailableRooms(availableRooms)
+    if(requestedDate.value === ""){
+        roomResults.className = "room-results hidden"
+        badInput.className = "bad-input"
+        badInputMessage.innerText = "Please input a date"
+    }
+    else if(customerRequestedDate < currentDate){
+        roomResults.className = "room-results hidden"
+        badInput.className = "bad-input"
+        badInputMessage.innerText = "Please pick a future date"
     }
     else{
-        showApologyMesssage()
+        roomResults.className = "room-results"
+        badInput.className = "bad-input hidden"
+        availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
+        console.log("available rooms: ", availableRooms)
+        showAvailableRooms(availableRooms)
     }
 }
 
 function showAvailableRooms(availableRooms){
-    //3 of them occupied on this date: 2023-12-14
-    roomResults.className = "room-results"
-    noResults.className = "no-results hidden"
-    let bedGrammar = ''
-    let bidetStatus = ''
+    //3 of them occupied on date: 2023/12/14
+    //4 of them occupied on date: 2023/12/15
+    //6 of them occupied on date: 2023/11/13
 
-    availableRooms.forEach((currentRoom) => {
-        if(currentRoom.numBeds === 1){
-            bedGrammar = 'Bed'
-        }
-        else{
-            bedGrammar = 'Beds'
-        }
-        if(currentRoom.bidet){
-            bidetStatus = "Yes"
-        }
-        else{
-            bidetStatus = "No"
-        }
-        availableRoomsDatalist.innerHTML += 
-        `<article class="search-result-item-container">
-            <figure class="bed-container">
-              <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
-            </figure>
-            <article class="text-search-result-item-container">
-              <h4 class="text-search-result-item">
-              ${capitalizeFirstLetter(currentRoom.roomType)}, 
-              ${capitalizeFirstLetter(currentRoom.bedSize)},
-              ${currentRoom.numBeds} ${bedGrammar},
-              Bidet: ${bidetStatus}</h4>
-            </article>
-            <button class="book-button">Book</button>
-          </article>`
-    })
+    if(availableRooms.length === 0){
+        showApologyMesssage()
+    }
+    else{
+        roomResults.className = "room-results"
+        noResults.className = "no-results hidden"
+        let bedGrammar = ''
+        let bidetStatus = ''
+
+        availableRooms.forEach((currentRoom) => {
+            if(currentRoom.numBeds === 1){
+                bedGrammar = 'Bed'
+            }
+            else{
+                bedGrammar = 'Beds'
+            }
+            if(currentRoom.bidet){
+                bidetStatus = "Yes"
+            }
+            else{
+                bidetStatus = "No"
+            }
+            availableRoomsDatalist.innerHTML += 
+            `<article class="search-result-item-container">
+                <figure class="bed-container">
+                <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
+                </figure>
+                <article class="text-search-result-item-container">
+                <h4 class="text-search-result-item">
+                ${capitalizeFirstLetter(currentRoom.roomType)}, 
+                ${capitalizeFirstLetter(currentRoom.bedSize)},
+                ${currentRoom.numBeds} ${bedGrammar},
+                Bidet: ${bidetStatus}</h4>
+                </article>
+                <button class="book-button">Book</button>
+            </article>`
+        })
+    }
 }
 
 function showApologyMesssage(){
@@ -257,14 +282,25 @@ function showApologyMesssage(){
 }
 
 function displayFilteredList(){
-    filteredList = currentCustomer.filterByRoomType(dropdownMenu.value, availableRooms)
-
-    if(availableRooms.length > 0 && dropdownMenu.value != "select room" && filteredList.length > 0){
-        availableRoomsDatalist.innerHTML = "" 
-        showAvailableRooms(filteredList)
+    console.log('yee: ', availableRooms)
+    if(dropdownMenu.value === "select room"){
+        roomResults.className = "room-results hidden"
+        badInput.className = "bad-input"
+        badInputMessage.innerText = "Please select a room type"
     }
     else{
-        showApologyMesssage()
+        if(availableRooms === undefined){
+            roomResults.className = "room-results hidden"
+            badInput.className = "bad-input"
+            badInputMessage.innerText = "Please input date & room type to see results"
+        }
+        else{
+            filteredList = currentCustomer.filterByRoomType(dropdownMenu.value, availableRooms)
+            if(filteredList.length > 0){
+                availableRoomsDatalist.innerHTML = "" 
+                showAvailableRooms(filteredList)
+            }
+        }
     }
 }
 
@@ -296,4 +332,13 @@ function formatReservationInfo(reservationList){
 
 function stopRefreshing(e){
     e.preventDefault()
+}
+
+function setCurrentDate(){
+    const date = new Date()
+    let currentDay = date.getDate()
+    let currentMonth = date.getMonth() + 1
+    let currentYear = date.getFullYear()
+    currentDate = `${currentYear}${currentMonth}${currentDay}`
+    currentDate = Number(currentDate)
 }

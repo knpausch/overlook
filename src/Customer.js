@@ -35,7 +35,9 @@ class Customer {
 
     findAllAvailableRooms(date, bookingData, roomData){
         const occupiedList = bookingData.filter((currentBooking) => {
-            return currentBooking.date === date
+            let formatedDate = currentBooking.date.split("/")
+            formatedDate = Number(formatedDate.join(""))
+            return formatedDate === date
         })
         let closedRooms = occupiedList.map((currentOcc) => {
             return currentOcc.roomNumber
