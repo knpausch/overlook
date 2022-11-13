@@ -50,6 +50,8 @@ const bookingControlsContainer = document.querySelector('#bookingControlsContain
 const requestedDate = document.querySelector('#requestedDate')
 const submitDateButton = document.querySelector('#submitDateButton')
 const availableRoomsDatalist = document.querySelector('#availableRoomsDatalist')
+const roomResults = document.querySelector('#roomResults')
+const noResults = document.querySelector('#noResults')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -198,11 +200,19 @@ function getRequestedDate(){
 
     availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
     console.log("available rooms: ", availableRooms)
-    showAvailableRooms(availableRooms)
+
+    if(availableRooms.length != 0){
+        showAvailableRooms(availableRooms)
+    }
+    else{
+        showApologyMesssage()
+    }
 }
 
 function showAvailableRooms(availableRooms){
     //3 of them occupied on this date: 2023-12-14
+    roomResults.className = "room-results"
+    noResults.className = "no-results hidden"
     let bedGrammar = ''
     let bidetStatus = ''
 
@@ -234,6 +244,11 @@ function showAvailableRooms(availableRooms){
             <button class="book-button">Book</button>
           </article>`
     })
+}
+
+function showApologyMesssage(){
+    roomResults.className = "room-results hidden"
+    noResults.className = "no-results"
 }
 
 //////////// HELPER FUNCTIONS ////////////
