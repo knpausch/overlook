@@ -236,12 +236,16 @@ body {
   font-size: 18px;
 }
 
-.no-results, .saved-booking{
+.no-results, .saved-booking, .bad-input{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50%;
   color: rgb(71, 68, 68);
+}
+
+.bad-input-message{
+  text-align: center;
 }
 
 .hidden{

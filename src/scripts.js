@@ -34,6 +34,9 @@ let allBookings
 let allRooms
 let currentView
 let customerRequestedDate
+let availableRooms
+let filteredList
+let currentDate
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -49,6 +52,12 @@ const bookingControlsContainer = document.querySelector('#bookingControlsContain
 const requestedDate = document.querySelector('#requestedDate')
 const submitDateButton = document.querySelector('#submitDateButton')
 const availableRoomsDatalist = document.querySelector('#availableRoomsDatalist')
+const roomResults = document.querySelector('#roomResults')
+const noResults = document.querySelector('#noResults')
+const dropdownMenu = document.querySelector('#dropdownMenu')
+const submitFilterButton = document.querySelector('#submitFilterButton')
+const badInput = document.querySelector('#badInput')
+const badInputMessage = document.querySelector('#badInputMessage')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -56,6 +65,7 @@ bookingViewButton.addEventListener('click', showbookingView)
 bookingControlsContainer.addEventListener('click', stopRefreshing)
 reservationViewButton.addEventListener('click', showReservationsView)
 submitDateButton.addEventListener('click', getRequestedDate)
+submitFilterButton.addEventListener('click', displayFilteredList)
 
 //////////// FUNCTIONS ////////////
 function fetchData(urls) {
@@ -67,6 +77,7 @@ function fetchData(urls) {
             createCustomer(apiCustomer)
             createRooms(apiRooms)
             displayAccountInfo()
+            setCurrentDate()
         })
         .catch(err => console.log(err))
 }
@@ -175,14 +186,19 @@ function displayTotalCost(){
 }
 
 function showbookingView(){
+    roomResults.className = "room-results"
+    noResults.className = "no-results hidden"
     currentViewText.innerText = "Booking View"
     reservationPage.className = "reservation-view hidden"
     bookingPage.className = "booking-view"
+    roomResults.className = "room-results"
+    badInput.className = "bad-input hidden"
 }
 
 function showReservationsView(){
     availableRoomsDatalist.innerHTML = "" 
     requestedDate.value = ""
+    dropdownMenu.value = "select room"
 
     currentView = 'reservationView'
     currentViewText.innerText = "Reservation View"
@@ -192,54 +208,104 @@ function showReservationsView(){
 
 function getRequestedDate(){
     availableRoomsDatalist.innerHTML = "" 
+    console.log("user gave us", requestedDate.value)
     customerRequestedDate = requestedDate.value.split("-")
-    customerRequestedDate = customerRequestedDate.join("/")  
-    const occupiedList = allBookings.filter((currentBooking) => {
-        return currentBooking.date === customerRequestedDate
-    })
-    console.log("occupied rooms: ", occupiedList)
-    showAvailableRooms(occupiedList)
+    customerRequestedDate = Number(customerRequestedDate.join(""))
+    console.log("formatted date: ", customerRequestedDate)
+    console.log("current date: ", currentDate)
+
+    if(requestedDate.value === ""){
+        roomResults.className = "room-results hidden"
+        badInput.className = "bad-input"
+        badInputMessage.innerText = "Please input a date"
+    }
+    else if(customerRequestedDate < currentDate){
+        roomResults.className = "room-results hidden"
+        badInput.className = "bad-input"
+        badInputMessage.innerText = "Please pick a future date"
+    }
+    else{
+        roomResults.className = "room-results"
+        badInput.className = "bad-input hidden"
+        availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
+        console.log("available rooms: ", availableRooms)
+        showAvailableRooms(availableRooms)
+    }
 }
 
-function showAvailableRooms(occupiedList){
-    //3 of them occupied on this date: 2023-12-14
+function showAvailableRooms(availableRooms){
+    //3 of them occupied on date: 2023/12/14
+    //4 of them occupied on date: 2023/12/15
+    //6 of them occupied on date: 2023/11/13
 
-    let bedGrammar = ''
-    let bidetStatus = ''
-    let availableRooms = []
-
-    if(occupiedList.length === 0){
-        availableRooms = allRooms
+    if(availableRooms.length === 0){
+        showApologyMesssage()
     }
+    else{
+        roomResults.className = "room-results"
+        noResults.className = "no-results hidden"
+        let bedGrammar = ''
+        let bidetStatus = ''
 
-    availableRooms.forEach((currentRoom) => {
-        if(currentRoom.numBeds === 1){
-            bedGrammar = 'Bed'
+        availableRooms.forEach((currentRoom) => {
+            if(currentRoom.numBeds === 1){
+                bedGrammar = 'Bed'
+            }
+            else{
+                bedGrammar = 'Beds'
+            }
+            if(currentRoom.bidet){
+                bidetStatus = "Yes"
+            }
+            else{
+                bidetStatus = "No"
+            }
+            availableRoomsDatalist.innerHTML += 
+            `<article class="search-result-item-container">
+                <figure class="bed-container">
+                <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
+                </figure>
+                <article class="text-search-result-item-container">
+                <h4 class="text-search-result-item">
+                ${capitalizeFirstLetter(currentRoom.roomType)}, 
+                ${capitalizeFirstLetter(currentRoom.bedSize)},
+                ${currentRoom.numBeds} ${bedGrammar},
+                Bidet: ${bidetStatus}</h4>
+                </article>
+                <button class="book-button">Book</button>
+            </article>`
+        })
+    }
+}
+
+function showApologyMesssage(){
+    roomResults.className = "room-results hidden"
+    noResults.className = "no-results"
+}
+
+function displayFilteredList(){
+    console.log('yee: ', availableRooms)
+    if(dropdownMenu.value === "select room"){
+        roomResults.className = "room-results hidden"
+        badInput.className = "bad-input"
+        badInputMessage.innerText = "Please select a room type"
+    }
+    else{
+        if(availableRooms === undefined){
+            roomResults.className = "room-results hidden"
+            badInput.className = "bad-input"
+            badInputMessage.innerText = "Please input date & room type to see results"
         }
         else{
-            bedGrammar = 'Beds'
+            roomResults.className = "room-results"
+            badInput.className = "bad-input hidden"
+            filteredList = currentCustomer.filterByRoomType(dropdownMenu.value, availableRooms)
+            if(filteredList.length > 0){
+                availableRoomsDatalist.innerHTML = "" 
+                showAvailableRooms(filteredList)
+            }
         }
-        if(currentRoom.bidet){
-            bidetStatus = "Yes"
-        }
-        else{
-            bidetStatus = "No"
-        }
-        availableRoomsDatalist.innerHTML += 
-        `<article class="search-result-item-container">
-            <figure class="bed-container">
-              <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
-            </figure>
-            <article class="text-search-result-item-container">
-              <h4 class="text-search-result-item">
-              ${capitalizeFirstLetter(currentRoom.roomType)}, 
-              ${capitalizeFirstLetter(currentRoom.bedSize)},
-              ${currentRoom.numBeds} ${bedGrammar},
-              Bidet: ${bidetStatus}</h4>
-            </article>
-            <button class="book-button">Book</button>
-          </article>`
-    })
+    }
 }
 
 //////////// HELPER FUNCTIONS ////////////
@@ -270,4 +336,13 @@ function formatReservationInfo(reservationList){
 
 function stopRefreshing(e){
     e.preventDefault()
+}
+
+function setCurrentDate(){
+    const date = new Date()
+    let currentDay = date.getDate()
+    let currentMonth = date.getMonth() + 1
+    let currentYear = date.getFullYear()
+    currentDate = `${currentYear}${currentMonth}${currentDay}`
+    currentDate = Number(currentDate)
 }

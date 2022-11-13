@@ -72,14 +72,14 @@
         <form class="room-filter-container">
           <h2 class="select-room-text">Select Room Type</h2>
           <div class="dropdown-and-search">
-            <select class="dropdown-menu" name="room-types" id="room-types">
-              <option value="selectRoom">Select Room</option>
-              <option value="singleRoom">Single Room</option>
-              <option value="juniorSuite">Junior Suite</option>
+            <select class="dropdown-menu" name="room-types" id="dropdownMenu">
+              <option value="select room">Select Room</option>
+              <option value="single room">Single Room</option>
+              <option value="junior suite">Junior Suite</option>
               <option value="suite">Suite</option>
-              <option value="residentialSuite">Residential Suite</option>
+              <option value="residential suite">Residential Suite</option>
             </select>
-            <button class="submit-filter-button">Submit</button>
+            <button class="submit-filter-button" id="submitFilterButton">Submit</button>
           </div>
         </form>
         <form class="room-filter-container">
@@ -91,23 +91,13 @@
       </section>
       <article class="search-results-container">
         <!-- RESULTS FOUND -->
-        <section class="room-results">
+        <section class="room-results" id="roomResults">
           <h2 class="available-rooms-text">Available Rooms</h2>
           <section class="available-rooms-datalist" id="availableRoomsDatalist">
           </section>
-          <!-- <article class="search-result-item-container">
-            <figure class="bed-container">
-              <img class="bed-img" src="./images/bed.png" alt="cartoon bed icon">
-            </figure>
-            <article class="text-search-result-item-container">
-              <h4 class="text-search-result-item">Date, king bed, single room, bidet, num beds</h4>
-            </article>
-            <button class="book-button">Book</button>
-          </article> -->
-
         </section>
         <!-- RESULTS NOT FOUND -->
-        <section class="no-results hidden">
+        <section class="no-results hidden" id="noResults">
           <h2>Uh oh</h2>
           <img class="sad-img" src="./images/sad.png" alt="sad face cartoon icon">
           <h3>"On the behalf of The Overlook
@@ -122,6 +112,12 @@
             </h2>
             <h2>- CEO Kiko “Smokin' Deals” Pausch</h2>
             <h5>*excluding Hawaii and the US territories</h4>
+        </section>
+        <!-- PLEASE INPUT DATE/ROOM TYPE TO SEE RESULTS -->
+        <section class="bad-input hidden" id="badInput">
+          <h2>Uh oh</h2>
+          <img class="sad-img" src="./images/sad.png" alt="sad face cartoon icon">
+          <h3 class="bad-input-message" id="badInputMessage"></h3>
         </section>
         <!-- BOOKING HAS BEEN SAVED -->
         <section class="saved-booking hidden">
