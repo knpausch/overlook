@@ -60,7 +60,7 @@ const dropdownMenu = document.querySelector('#dropdownMenu')
 const submitFilterButton = document.querySelector('#submitFilterButton')
 const badInput = document.querySelector('#badInput')
 const badInputMessage = document.querySelector('#badInputMessage')
-// const bookButton = document.querySelector('.book-button')
+const savedBooking = document.querySelector('#savedBooking')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -89,7 +89,6 @@ function fetchData(urls) {
 function createCustomer(data) {
     const randomUser = data[Math.floor(Math.random() * data.length)]
     currentCustomer = new Customer(randomUser)
-    // currentCustomer = new Customer(data)
     console.log(currentCustomer)
     allBookings = currentCustomer.createBooking(apiBookings)
     return currentCustomer
@@ -145,6 +144,7 @@ function displayPastBookings(){
 }
 
 function displayUpcomingBookings(){
+    upcomingBookingsList.innerHTML = ''
     let bedGrammar = ''
     let bidetStatus = ''
     let formatedUpcomingBookings = formatReservationInfo(customerUpcomingBookings)
@@ -190,6 +190,7 @@ function displayTotalCost(){
 }
 
 function showbookingView(){
+    savedBooking.className = "saved-booking hidden"
     roomResults.className = "room-results"
     noResults.className = "no-results hidden"
     currentViewText.innerText = "Booking View"
@@ -203,7 +204,6 @@ function showReservationsView(){
     availableRoomsDatalist.innerHTML = "" 
     requestedDate.value = ""
     dropdownMenu.value = "select room"
-
     currentView = 'reservationView'
     currentViewText.innerText = "Reservation View"
     reservationPage.className = "reservation-view"
@@ -309,17 +309,14 @@ function displayFilteredList(){
                 availableRoomsDatalist.innerHTML = "" 
                 showAvailableRooms(filteredList)
             }
+            else{
+                showApologyMesssage()
+            }
         }
     }
 }
 
 function addBooking(event){
-    //we need: 
-    //{ 
-    //  "userID": 48, (Done: currentCustomer.id)
-    //  "date": "2019/09/23", (Done: customerRequestedDate, just format it)
-    //  "roomNumber": 4 (Need: when user clicks on booking button)
-    //}
     console.log("are ya winnin son?")
 
     if(event.target.classList.contains("book-button")){
@@ -332,6 +329,9 @@ function addBooking(event){
 
     formatPostData(currentCustomer.id, customerRequestedDate, roomNumToBook)
     console.log("post data: ", postData)
+    savedBooking.className = "saved-booking"
+    roomResults.className = "room-results hidden"
+
     updateReservations(postData)
 }
 
@@ -364,21 +364,22 @@ function updateReservations(formattedPostData){
         .then(data => {
             console.log(data)
             updateBookings(data)
-            // addOrRemoveToPantry()
-            // displayMissingIngr()
         })
         .catch(err => console.log('Fetch Error: ', err))
 }
 
-/////////////////WIP//////////////////////////
 function updateBookings(newData) {
     console.log("old bookings: ", allBookings)
     allBookings = currentCustomer.createBooking(newData.bookings)
     console.log("new bookings: ", allBookings)
+
+    console.log("customer's old bookings: ", customerUpcomingBookings)
+    currentCustomer.findUpcomingBookings(allBookings)
+    customerUpcomingBookings = currentCustomer.upcomingBookings
+    console.log("customer's updated bookings: ", customerUpcomingBookings)
+    displayUpcomingBookings()
+    displayTotalCost()
 }
-//////////////////////WIP ^///////////////////////
-
-
 
 //////////// HELPER FUNCTIONS ////////////
 function capitalizeFirstLetter(string) {

@@ -244,7 +244,7 @@ body {
   color: rgb(71, 68, 68);
 }
 
-.bad-input-message{
+.bad-input-message, .saved-booking{
   text-align: center;
 }
 
