@@ -1,6 +1,8 @@
 import chai from 'chai'
 import Customer from '../src/Customer'
+import Booking from '../src/Booking'
 import { customerSample } from './customer-sample'
+import { bookingSample } from './booking-sample'
 
 const expect = chai.expect
 
@@ -35,6 +37,13 @@ describe('Customer Class', function() {
   it('should set allBookings property to an empty array', function() {
     expect(customer1.allBookings).to.deep.equal([])
     expect(customer2.allBookings).to.deep.equal([])
+  })
+
+  it('should create a new Booking object', function() {
+    // customer1.createBooking()
+
+    // expect(customer1.allBookings).to.deep.equal([])
+    // expect(customer2.allBookings).to.deep.equal([])
   })
 
 })
