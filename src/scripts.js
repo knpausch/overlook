@@ -323,51 +323,11 @@ function addBooking(event){
 
     if(event.target.classList.contains("book-button")){
         console.log("you hit a button fam")
-        roomNumToBook = event.target.id
+        roomNumToBook = Number(event.target.id)
     }
+    console.log("id: ",currentCustomer.id)
+    console.log("date: ",customerRequestedDate)
     console.log("you picked room: ", roomNumToBook)
-
-    // if(event.target.id === "room1"){
-    //     roomNumToBook = 1
-    //     console.log("room 1")
-    // }
-    // else if(event.target.id === "room2"){
-    //     roomNumToBook = 2
-    //     console.log("room 2")
-    // }
-    // else if(event.target.id === "room3"){
-    //     roomNumToBook = 3
-    //     console.log("room 3")
-    // }
-    // else if(event.target.id === "room4"){
-    //     roomNumToBook = 4
-    //     console.log("room 4")
-    // }
-    // else if(event.target.id === "room5"){
-    //     roomNumToBook = 5
-    //     console.log("room 5")
-    // }
-    // else if(event.target.id === "room6"){
-    //     roomNumToBook = 6
-    //     console.log("room 6")
-    // }
-    // else if(event.target.id === "room7"){
-    //     roomNumToBook = 7
-    //     console.log("room 7")
-    // }
-    // else if(event.target.id === "room8"){
-    //     roomNumToBook = 8
-    //     console.log("room 8")
-    // }
-    // else if(event.target.id === "room1"){
-    //     roomNumToBook = 9
-    //     console.log("room 9")
-    // }
-    // else if(event.target.id === "room1"){
-    //     roomNumToBook = 10
-    //     console.log("room 10")
-    // }
-
 }
 
 //////////// HELPER FUNCTIONS ////////////
