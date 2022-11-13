@@ -159,7 +159,12 @@ body {
   text-align: center;
 }
 
-.select-date-text, .select-room-text, .view-reservations-text{
+.select-room-text, .select-date-text{
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+.view-reservations-text{
   margin-top: 20px;
   margin-bottom: 20px;
 }
