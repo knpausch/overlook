@@ -52,6 +52,8 @@ const submitDateButton = document.querySelector('#submitDateButton')
 const availableRoomsDatalist = document.querySelector('#availableRoomsDatalist')
 const roomResults = document.querySelector('#roomResults')
 const noResults = document.querySelector('#noResults')
+const dropdownMenu = document.querySelector('#dropdownMenu')
+const submitFilterButton = document.querySelector('#submitFilterButton')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -59,6 +61,7 @@ bookingViewButton.addEventListener('click', showbookingView)
 bookingControlsContainer.addEventListener('click', stopRefreshing)
 reservationViewButton.addEventListener('click', showReservationsView)
 submitDateButton.addEventListener('click', getRequestedDate)
+submitFilterButton.addEventListener('click', displayFilteredList)
 
 //////////// FUNCTIONS ////////////
 function fetchData(urls) {
@@ -249,6 +252,11 @@ function showAvailableRooms(availableRooms){
 function showApologyMesssage(){
     roomResults.className = "room-results hidden"
     noResults.className = "no-results"
+}
+
+function displayFilteredList(){
+    console.log("ay boi: ", dropdownMenu.value)
+
 }
 
 //////////// HELPER FUNCTIONS ////////////

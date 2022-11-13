@@ -48,6 +48,10 @@ class Customer {
           }, [])
           return openRooms
     }
+
+    // filterByRoomType(){
+
+    // }
 }
 
 export default Customer
