@@ -332,7 +332,7 @@ function addBooking(event){
 
     formatPostData(currentCustomer.id, customerRequestedDate, roomNumToBook)
     console.log("post data: ", postData)
-    // updateReservations()
+    updateReservations(postData)
 }
 
 function formatPostData(id, date, roomNumber){
@@ -345,7 +345,6 @@ function formatPostData(id, date, roomNumber){
     let day = date.slice(6,8)
     day = day.join("")
     date = year + "/" + month + "/" + day
-
     postData = 
     { 
         userID: id, 
@@ -355,28 +354,21 @@ function formatPostData(id, date, roomNumber){
 }
 
 function updateReservations(formattedPostData){
-    return fetch(usersURL, {
+    return fetch(bookingsURL, {
         method: 'POST',
-        body: JSON.stringify(postData),
+        body: JSON.stringify(formattedPostData),
         headers: { 'Content-Type': 'application/json' }
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Sorry, something went wrong. ${response.status}: ${response.statusText}`)
-            }
-            return response.json()
-        })
-        .then(test =>
-            getData(usersURL))
+        .then(response => response.json())
+        // .then(test =>
+        //     getData(bookingsURL))
         .then(data => {
-            updateUser(data)
-            addOrRemoveToPantry()
-            displayMissingIngr()
+            console.log(data)
+            // updateUser(data)
+            // addOrRemoveToPantry()
+            // displayMissingIngr()
         })
-        .catch(err => {
-            console.log('Fetch Error: ', err)
-            errorMessage.innerHTML = `Oops, something went wrong. Try again later.`
-        })
+        .catch(err => console.log('Fetch Error: ', err))
 }
 
 //////////// HELPER FUNCTIONS ////////////
