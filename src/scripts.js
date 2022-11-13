@@ -297,6 +297,8 @@ function displayFilteredList(){
             badInputMessage.innerText = "Please input date & room type to see results"
         }
         else{
+            roomResults.className = "room-results"
+            badInput.className = "bad-input hidden"
             filteredList = currentCustomer.filterByRoomType(dropdownMenu.value, availableRooms)
             if(filteredList.length > 0){
                 availableRoomsDatalist.innerHTML = "" 
