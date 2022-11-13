@@ -37,6 +37,7 @@ let customerRequestedDate
 let availableRooms
 let filteredList
 let currentDate
+let roomNumToBook
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -58,6 +59,7 @@ const dropdownMenu = document.querySelector('#dropdownMenu')
 const submitFilterButton = document.querySelector('#submitFilterButton')
 const badInput = document.querySelector('#badInput')
 const badInputMessage = document.querySelector('#badInputMessage')
+// const bookButton = document.querySelector('.book-button')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -66,6 +68,7 @@ bookingControlsContainer.addEventListener('click', stopRefreshing)
 reservationViewButton.addEventListener('click', showReservationsView)
 submitDateButton.addEventListener('click', getRequestedDate)
 submitFilterButton.addEventListener('click', displayFilteredList)
+roomResults.addEventListener('click', addBooking)
 
 //////////// FUNCTIONS ////////////
 function fetchData(urls) {
@@ -247,6 +250,7 @@ function showAvailableRooms(availableRooms){
         let bedGrammar = ''
         let bidetStatus = ''
 
+        console.log("hi grandpa: ",availableRooms)
         availableRooms.forEach((currentRoom) => {
             if(currentRoom.numBeds === 1){
                 bedGrammar = 'Bed'
@@ -272,7 +276,7 @@ function showAvailableRooms(availableRooms){
                 ${currentRoom.numBeds} ${bedGrammar},
                 Bidet: ${bidetStatus}</h4>
                 </article>
-                <button class="book-button">Book</button>
+                <button class="book-button" id="${currentRoom.roomNumber}">Book</button>
             </article>`
         })
     }
@@ -306,6 +310,64 @@ function displayFilteredList(){
             }
         }
     }
+}
+
+function addBooking(event){
+    //we need: 
+    //{ 
+    //  "userID": 48, (Done: currentCustomer.id)
+    //  "date": "2019/09/23", (Done: customerRequestedDate, just format it)
+    //  "roomNumber": 4 (Need: when user clicks on booking button)
+    //}
+    console.log("are ya winnin son?")
+
+    if(event.target.classList.contains("book-button")){
+        console.log("you hit a button fam")
+        roomNumToBook = event.target.id
+    }
+    console.log("you picked room: ", roomNumToBook)
+
+    // if(event.target.id === "room1"){
+    //     roomNumToBook = 1
+    //     console.log("room 1")
+    // }
+    // else if(event.target.id === "room2"){
+    //     roomNumToBook = 2
+    //     console.log("room 2")
+    // }
+    // else if(event.target.id === "room3"){
+    //     roomNumToBook = 3
+    //     console.log("room 3")
+    // }
+    // else if(event.target.id === "room4"){
+    //     roomNumToBook = 4
+    //     console.log("room 4")
+    // }
+    // else if(event.target.id === "room5"){
+    //     roomNumToBook = 5
+    //     console.log("room 5")
+    // }
+    // else if(event.target.id === "room6"){
+    //     roomNumToBook = 6
+    //     console.log("room 6")
+    // }
+    // else if(event.target.id === "room7"){
+    //     roomNumToBook = 7
+    //     console.log("room 7")
+    // }
+    // else if(event.target.id === "room8"){
+    //     roomNumToBook = 8
+    //     console.log("room 8")
+    // }
+    // else if(event.target.id === "room1"){
+    //     roomNumToBook = 9
+    //     console.log("room 9")
+    // }
+    // else if(event.target.id === "room1"){
+    //     roomNumToBook = 10
+    //     console.log("room 10")
+    // }
+
 }
 
 //////////// HELPER FUNCTIONS ////////////
