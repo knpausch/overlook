@@ -191,6 +191,8 @@ function showbookingView(){
     currentViewText.innerText = "Booking View"
     reservationPage.className = "reservation-view hidden"
     bookingPage.className = "booking-view"
+    roomResults.className = "room-results"
+    badInput.className = "bad-input hidden"
 }
 
 function showReservationsView(){
