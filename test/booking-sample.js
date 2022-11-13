@@ -7,7 +7,7 @@ export const bookingSample = [
     },
     {
         id: "5fwrgu4i7k55hl6t5",
-        userID: 43,
+        userID: 1,
         date: "2022/01/24",
         roomNumber: 24
     },
@@ -26,12 +26,12 @@ export const bookingSample = [
     {
         id: "5fwrgu4i7k55hl6t8",
         userID: 1,
-        date: "2022/02/05",
+        date: "2023/02/05",
         roomNumber: 12
     },
     {
         id: "5fwrgu4i7k55hl6t9",
-        userID: 38,
+        userID: 2,
         date: "2023/12/14",
         roomNumber: 14
     },
