@@ -38,6 +38,7 @@ let availableRooms
 let filteredList
 let currentDate
 let roomNumToBook
+let postData
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -328,6 +329,54 @@ function addBooking(event){
     console.log("id: ",currentCustomer.id)
     console.log("date: ",customerRequestedDate)
     console.log("you picked room: ", roomNumToBook)
+
+    formatPostData(currentCustomer.id, customerRequestedDate, roomNumToBook)
+    console.log("post data: ", postData)
+    // updateReservations()
+}
+
+function formatPostData(id, date, roomNumber){
+    date = date.toString()
+    date = date.split("")
+    let year = date.slice(0,4)
+    year = year.join("")
+    let month = date.slice(4,6)
+    month = month.join("")
+    let day = date.slice(6,8)
+    day = day.join("")
+    date = year + "/" + month + "/" + day
+
+    postData = 
+    { 
+        userID: id, 
+        date: date, 
+        roomNumber: roomNumber 
+    }
+}
+
+function updateReservations(formattedPostData){
+    return fetch(usersURL, {
+        method: 'POST',
+        body: JSON.stringify(postData),
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Sorry, something went wrong. ${response.status}: ${response.statusText}`)
+            }
+            return response.json()
+        })
+        .then(test =>
+            getData(usersURL))
+        .then(data => {
+            updateUser(data)
+            addOrRemoveToPantry()
+            displayMissingIngr()
+        })
+        .catch(err => {
+            console.log('Fetch Error: ', err)
+            errorMessage.innerHTML = `Oops, something went wrong. Try again later.`
+        })
 }
 
 //////////// HELPER FUNCTIONS ////////////
