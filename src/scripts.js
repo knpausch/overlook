@@ -226,6 +226,7 @@ function getRequestedDate(){
     else{
         roomResults.className = "room-results"
         badInput.className = "bad-input hidden"
+        console.log("HIII: ", customerRequestedDate)
         availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
         showAvailableRooms(availableRooms)
     }
