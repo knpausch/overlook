@@ -14,7 +14,7 @@ class Customer {
             return new Booking(currentBooking)
         })
     }
-
+    
     findCustomersBookings(bookingData){
         this.allBookings = bookingData.filter((currentBooking) => {
             return currentBooking.userID === this.id
@@ -22,14 +22,40 @@ class Customer {
     }
 
     findPastBookings(bookingData){
+        let bookingIsUpcoming
+        let currentDate = this.getCurrentDate()
+
         this.pastBookings = bookingData.filter((currentBooking) => {
-            return currentBooking.userID === this.id && !currentBooking.checkBookingIsUpcoming()
+            let chosenDate = currentBooking.date.split("/")
+            chosenDate = Number(chosenDate.join(""))
+
+            if(chosenDate >= currentDate){
+                bookingIsUpcoming = true
+            }
+            else{
+                bookingIsUpcoming = false
+            }
+
+            return currentBooking.userID === this.id && !bookingIsUpcoming
         })
     }
 
     findUpcomingBookings(bookingData){
+        let bookingIsUpcoming
+        let currentDate = this.getCurrentDate()
+
         this.upcomingBookings = bookingData.filter((currentBooking) => {
-            return currentBooking.userID === this.id && currentBooking.checkBookingIsUpcoming()
+            let chosenDate = currentBooking.date.split("/")
+            chosenDate = Number(chosenDate.join(""))
+
+            if(chosenDate >= currentDate){
+                bookingIsUpcoming = true
+            }
+            else{
+                bookingIsUpcoming = false
+            }
+
+            return currentBooking.userID === this.id && bookingIsUpcoming
         })
     }
 
@@ -55,6 +81,15 @@ class Customer {
         return availableRooms.filter((currentRoom) => {
             return currentRoom.roomType === givenRoomType
         })
+    }    
+
+    getCurrentDate(){
+        const date = new Date()
+        let currentDay = date.getDate()
+        let currentMonth = date.getMonth() + 1
+        let currentYear = date.getFullYear()
+        let currentDate = `${currentYear}${currentMonth}${currentDay}`
+        return currentDate = Number(currentDate)
     }
 }
 
