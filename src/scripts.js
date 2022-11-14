@@ -20,7 +20,7 @@ import Booking from './Booking'
 
 //////////// API URLS ////////////
 // const customersURL = 'http://localhost:3001/api/v1/customers'
-const customersURL = 'http://localhost:3001/api/v1/customers/3'
+const customersURL = 'http://localhost:3001/api/v1/customers/1'
 const bookingsURL = 'http://localhost:3001/api/v1/bookings'
 const roomsURL = 'http://localhost:3001/api/v1/rooms'
 
@@ -40,6 +40,7 @@ let filteredList
 let currentDate
 let roomNumToBook
 let postData
+let customerNumber
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -79,8 +80,26 @@ roomResults.addEventListener('click', addBooking)
 
 //////////// FUNCTIONS ////////////
 function verifyLogin(){
-    console.log("bitch: ", username.value)
-
+    console.log("you entered: ", username.value)
+    let usernameInput = username.value
+    let usernameNumber
+    if(usernameInput.length === 9 || usernameInput.length === 10)
+    {
+        usernameInput = usernameInput.split("")
+        usernameInput = (usernameInput.splice(0,8)).join("")
+        usernameNumber = username.value.split("")
+        usernameNumber = (usernameNumber.splice(8,2)).join("")
+        if(usernameInput === "customer" && (usernameNumber > 0 && usernameNumber <= 50)){
+            console.log("login 100% success")
+            customerNumber = (Number(usernameNumber)).toString()
+        }
+        else{
+            console.log("wrong login")
+        }
+    }
+    else{
+        console.log("wrong login")
+    }
 }
 
 function fetchData(urls) {
