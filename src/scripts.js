@@ -63,10 +63,13 @@ const badInput = document.querySelector('#badInput')
 const badInputMessage = document.querySelector('#badInputMessage')
 const savedBooking = document.querySelector('#savedBooking')
 const loginButton = document.querySelector('#loginButton')
+const username = document.querySelector('#username')
+const loginForm = document.querySelector('#loginForm')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
-loginButton('click', verifyLogin)
+loginForm.addEventListener('click', stopRefreshing)
+loginButton.addEventListener('click', verifyLogin)
 bookingViewButton.addEventListener('click', showbookingView)
 bookingControlsContainer.addEventListener('click', stopRefreshing)
 reservationViewButton.addEventListener('click', showReservationsView)
@@ -76,6 +79,7 @@ roomResults.addEventListener('click', addBooking)
 
 //////////// FUNCTIONS ////////////
 function verifyLogin(){
+    console.log("bitch: ", username.value)
 
 }
 
