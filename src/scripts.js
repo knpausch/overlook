@@ -20,7 +20,8 @@ import Booking from './Booking'
 
 //////////// API URLS ////////////
 // const customersURL = 'http://localhost:3001/api/v1/customers'
-const customersURL = 'http://localhost:3001/api/v1/customers/1'
+// const customersURL = 'http://localhost:3001/api/v1/customers/1'
+let customerURL
 const bookingsURL = 'http://localhost:3001/api/v1/bookings'
 const roomsURL = 'http://localhost:3001/api/v1/rooms'
 
@@ -68,9 +69,10 @@ const username = document.querySelector('#username')
 const loginForm = document.querySelector('#loginForm')
 const password = document.querySelector('#password')
 const incorrectLoginText = document.querySelector('#incorrectLoginText')
+const loginView = document.querySelector('#loginView')
 
 //////////// EVENT LISTENERS ////////////
-window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
+// window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
 loginForm.addEventListener('click', stopRefreshing)
 loginButton.addEventListener('click', verifyLogin)
 bookingViewButton.addEventListener('click', showbookingView)
@@ -96,6 +98,11 @@ function verifyLogin(){
             console.log("login 100% success")
             customerNumber = (Number(usernameNumber)).toString()
             console.log("Here: ", customerNumber)
+            customerURL = `http://localhost:3001/api/v1/customers/${customerNumber}`
+            console.log(customerURL)
+            fetchData([customerURL, bookingsURL, roomsURL])
+            loginView.className = "login-view hidden"
+            reservationPage.className = "reservation-view"
         }
         else{
             console.log("wrong login")
