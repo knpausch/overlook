@@ -67,6 +67,7 @@ const loginButton = document.querySelector('#loginButton')
 const username = document.querySelector('#username')
 const loginForm = document.querySelector('#loginForm')
 const password = document.querySelector('#password')
+const incorrectLoginText = document.querySelector('#incorrectLoginText')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -98,10 +99,12 @@ function verifyLogin(){
         }
         else{
             console.log("wrong login")
+            incorrectLoginText.className = "incorrect-login-text"
         }
     }
     else{
         console.log("wrong login")
+        incorrectLoginText.className = "incorrect-login-text"
     }
 }
 
