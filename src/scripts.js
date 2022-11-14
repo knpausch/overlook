@@ -19,7 +19,9 @@ import Room from './Room'
 import Booking from './Booking'
 
 //////////// API URLS ////////////
-const customersURL = 'http://localhost:3001/api/v1/customers'
+// const customersURL = 'http://localhost:3001/api/v1/customers'
+// const customersURL = 'http://localhost:3001/api/v1/customers/1'
+let customerURL
 const bookingsURL = 'http://localhost:3001/api/v1/bookings'
 const roomsURL = 'http://localhost:3001/api/v1/rooms'
 
@@ -39,6 +41,7 @@ let filteredList
 let currentDate
 let roomNumToBook
 let postData
+let customerNumber
 
 //////////// QUERY SELECTORS ////////////
 const currentUser = document.querySelector('#userText')
@@ -61,9 +64,17 @@ const submitFilterButton = document.querySelector('#submitFilterButton')
 const badInput = document.querySelector('#badInput')
 const badInputMessage = document.querySelector('#badInputMessage')
 const savedBooking = document.querySelector('#savedBooking')
+const loginButton = document.querySelector('#loginButton')
+const username = document.querySelector('#username')
+const loginForm = document.querySelector('#loginForm')
+const password = document.querySelector('#password')
+const incorrectLoginText = document.querySelector('#incorrectLoginText')
+const loginView = document.querySelector('#loginView')
 
 //////////// EVENT LISTENERS ////////////
-window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
+// window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
+loginForm.addEventListener('click', stopRefreshing)
+loginButton.addEventListener('click', verifyLogin)
 bookingViewButton.addEventListener('click', showbookingView)
 bookingControlsContainer.addEventListener('click', stopRefreshing)
 reservationViewButton.addEventListener('click', showReservationsView)
@@ -72,12 +83,47 @@ submitFilterButton.addEventListener('click', displayFilteredList)
 roomResults.addEventListener('click', addBooking)
 
 //////////// FUNCTIONS ////////////
+function verifyLogin(){
+    console.log("you entered: ", username.value)
+    let usernameInput = username.value
+    let usernameNumber
+    let passwordInput = password.value
+    if((usernameInput.length === 9 || usernameInput.length === 10) && passwordInput === "overlook2021")
+    {
+        usernameInput = usernameInput.split("")
+        usernameInput = (usernameInput.splice(0,8)).join("")
+        usernameNumber = username.value.split("")
+        usernameNumber = (usernameNumber.splice(8,2)).join("")
+        if(usernameInput === "customer" && (usernameNumber > 0 && usernameNumber <= 50)){
+            console.log("login 100% success")
+            customerNumber = (Number(usernameNumber)).toString()
+            console.log("Here: ", customerNumber)
+            customerURL = `http://localhost:3001/api/v1/customers/${customerNumber}`
+            console.log(customerURL)
+            fetchData([customerURL, bookingsURL, roomsURL])
+            loginView.className = "login-view hidden"
+            reservationPage.className = "reservation-view"
+        }
+        else{
+            console.log("wrong login")
+            incorrectLoginText.className = "incorrect-login-text"
+        }
+    }
+    else{
+        console.log("wrong login")
+        incorrectLoginText.className = "incorrect-login-text"
+    }
+}
+
 function fetchData(urls) {
     Promise.all([getData(urls[0]), getData(urls[1]), getData(urls[2])])
         .then(data => {
-            apiCustomer = data[0].customers
+            // apiCustomer = data[0].customers
+            apiCustomer = data[0]
             apiBookings = data[1].bookings
             apiRooms = data[2].rooms
+            console.log("HEY: ", apiCustomer)
+
             createCustomer(apiCustomer)
             createRooms(apiRooms)
             displayAccountInfo()
@@ -87,8 +133,10 @@ function fetchData(urls) {
 }
 
 function createCustomer(data) {
-    const randomUser = data[Math.floor(Math.random() * data.length)]
-    currentCustomer = new Customer(randomUser)
+    // const randomUser = data[Math.floor(Math.random() * data.length)]
+    // currentCustomer = new Customer(randomUser)
+    console.log("DATA: ", apiCustomer.name)
+    currentCustomer = new Customer(data)
     allBookings = currentCustomer.createBooking(apiBookings)
     return currentCustomer
 }
@@ -226,17 +274,12 @@ function getRequestedDate(){
     else{
         roomResults.className = "room-results"
         badInput.className = "bad-input hidden"
-        console.log("HIII: ", customerRequestedDate)
         availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
         showAvailableRooms(availableRooms)
     }
 }
 
 function showAvailableRooms(availableRooms){
-    //3 of them occupied on date: 2023/12/14
-    //4 of them occupied on date: 2023/12/15
-    //6 of them occupied on date: 2023/11/13
-
     if(availableRooms.length === 0){
         showApologyMesssage()
     }
