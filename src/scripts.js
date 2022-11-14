@@ -66,6 +66,7 @@ const savedBooking = document.querySelector('#savedBooking')
 const loginButton = document.querySelector('#loginButton')
 const username = document.querySelector('#username')
 const loginForm = document.querySelector('#loginForm')
+const password = document.querySelector('#password')
 
 //////////// EVENT LISTENERS ////////////
 window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
@@ -83,7 +84,8 @@ function verifyLogin(){
     console.log("you entered: ", username.value)
     let usernameInput = username.value
     let usernameNumber
-    if(usernameInput.length === 9 || usernameInput.length === 10)
+    let passwordInput = password.value
+    if((usernameInput.length === 9 || usernameInput.length === 10) && passwordInput === "overlook2021")
     {
         usernameInput = usernameInput.split("")
         usernameInput = (usernameInput.splice(0,8)).join("")
@@ -92,6 +94,7 @@ function verifyLogin(){
         if(usernameInput === "customer" && (usernameNumber > 0 && usernameNumber <= 50)){
             console.log("login 100% success")
             customerNumber = (Number(usernameNumber)).toString()
+            console.log("Here: ", customerNumber)
         }
         else{
             console.log("wrong login")
