@@ -358,6 +358,7 @@ function updateBookings(newData) {
     customerUpcomingBookings = currentCustomer.upcomingBookings
     displayUpcomingBookings()
     displayTotalCost()
+    availableRooms = []
 }
 
 //////////// HELPER FUNCTIONS ////////////
