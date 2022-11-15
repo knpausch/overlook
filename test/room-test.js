@@ -20,8 +20,8 @@ describe('Room Class', function() {
   })
 
   it('should set room roomType', function() {
-    expect(room1.roomType).to.equal("residential suite")
-    expect(room2.roomType).to.equal("suite")
+    expect(room1.roomType).to.equal('residential suite')
+    expect(room2.roomType).to.equal('suite')
   })
 
   it('should set room bidet', function() {
@@ -30,8 +30,8 @@ describe('Room Class', function() {
   })
 
   it('should set room bedSize', function() {
-    expect(room1.bedSize).to.equal("queen")
-    expect(room2.bedSize).to.equal("full")
+    expect(room1.bedSize).to.equal('queen')
+    expect(room2.bedSize).to.equal('full')
   })
 
   it('should set room numBeds', function() {
