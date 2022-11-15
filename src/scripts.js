@@ -341,6 +341,9 @@ function displayFilteredList(){
 
 function addBooking(event){
     if(event.target.classList.contains('book-button')){
+        availableRooms = availableRooms.filter((currentRoom) => {
+            return currentRoom.roomNumber != event.target.id
+        })
         roomNumToBook = Number(event.target.id)
     }
     formatPostData(currentCustomer.id, customerRequestedDate, roomNumToBook)

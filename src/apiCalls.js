@@ -4,7 +4,6 @@ import { viewInfo } from "./scripts"
 const getData = (url) => {
     return fetch(url)
     .then(response => {
-      console.log(response)
       if(!response.ok) {
         throw new Error(`Sorry, try again later. ${response.status}: ${response.statusText}`)
       }
