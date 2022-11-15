@@ -8,8 +8,8 @@ class Booking{
     }
 
     formatDate(){
-        let chargeDate = this.date.split("/")
-        chargeDate = Number(chargeDate.join(""))
+        let chargeDate = this.date.split('/')
+        chargeDate = Number(chargeDate.join(''))
         this.numberedDate = chargeDate
     }
 }

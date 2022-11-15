@@ -15,8 +15,8 @@ describe('Booking Class', function() {
     })
 
   it('should set booking id', function() {
-    expect(booking1.id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(booking2.id).to.equal("5fwrgu4i7k55hl6t5")
+    expect(booking1.id).to.equal('5fwrgu4i7k55hl6sz')
+    expect(booking2.id).to.equal('5fwrgu4i7k55hl6t5')
   })
 
   it('should set booking userID', function() {
@@ -25,8 +25,8 @@ describe('Booking Class', function() {
   })
 
   it('should set booking date', function() {
-    expect(booking1.date).to.equal("2022/04/22")
-    expect(booking2.date).to.equal("2022/01/24")
+    expect(booking1.date).to.equal('2022/04/22')
+    expect(booking2.date).to.equal('2022/01/24')
   })
 
   it('should set booking roomNumber', function() {

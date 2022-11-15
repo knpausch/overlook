@@ -107,14 +107,14 @@ describe('Customer Class', function() {
 
   it('should filter all available rooms based upon given room type', function() {
     let availableRooms = customer1.findAllAvailableRooms(20231214, bookingData, roomData)
-    let result1 = customer1.filterByRoomType("suite", availableRooms)
+    let result1 = customer1.filterByRoomType('suite', availableRooms)
     expect(result1).to.deep.equal([
         {roomNumber: 2, roomType: 'suite', bidet: false, bedSize: 'full', numBeds: 2, costPerNight: 477.38},
         {roomNumber: 10, roomType: 'suite', bidet: false, bedSize: 'twin', numBeds: 1, costPerNight: 497.64},
         {roomNumber: 24, roomType: 'suite', bidet: false, bedSize: 'queen', numBeds: 1, costPerNight: 327.24}
     ])
 
-    let result2 = customer2.filterByRoomType("kiddie room", availableRooms)
+    let result2 = customer2.filterByRoomType('kiddie room', availableRooms)
     expect(result2).to.deep.equal([])
   })
 

@@ -26,8 +26,8 @@ class Customer {
         let currentDate = this.getCurrentDate()
 
         this.pastBookings = bookingData.filter((currentBooking) => {
-            let chosenDate = currentBooking.date.split("/")
-            chosenDate = Number(chosenDate.join(""))
+            let chosenDate = currentBooking.date.split('/')
+            chosenDate = Number(chosenDate.join(''))
 
             if(chosenDate >= currentDate){
                 bookingIsUpcoming = true
@@ -45,8 +45,8 @@ class Customer {
         let currentDate = this.getCurrentDate()
 
         this.upcomingBookings = bookingData.filter((currentBooking) => {
-            let chosenDate = currentBooking.date.split("/")
-            chosenDate = Number(chosenDate.join(""))
+            let chosenDate = currentBooking.date.split('/')
+            chosenDate = Number(chosenDate.join(''))
 
             if(chosenDate >= currentDate){
                 bookingIsUpcoming = true
@@ -61,8 +61,8 @@ class Customer {
 
     findAllAvailableRooms(date, bookingData, roomData){
         const occupiedList = bookingData.filter((currentBooking) => {
-            let formatedDate = currentBooking.date.split("/")
-            formatedDate = Number(formatedDate.join(""))
+            let formatedDate = currentBooking.date.split('/')
+            formatedDate = Number(formatedDate.join(''))
             return formatedDate === date
         })
         let closedRooms = occupiedList.map((currentOcc) => {
