@@ -16,11 +16,8 @@ import './css/styles.css';
 import getData from './apiCalls'
 import Customer from './Customer'
 import Room from './Room'
-import Booking from './Booking'
 
 //////////// API URLS ////////////
-// const customersURL = 'http://localhost:3001/api/v1/customers'
-// const customersURL = 'http://localhost:3001/api/v1/customers/1'
 let customerURL
 const bookingsURL = 'http://localhost:3001/api/v1/bookings'
 const roomsURL = 'http://localhost:3001/api/v1/rooms'
@@ -34,7 +31,6 @@ let customerPastBookings
 let customerUpcomingBookings
 let allBookings
 let allRooms
-let currentView
 let customerRequestedDate
 let availableRooms
 let filteredList
@@ -72,7 +68,6 @@ const incorrectLoginText = document.querySelector('#incorrectLoginText')
 const loginView = document.querySelector('#loginView')
 
 //////////// EVENT LISTENERS ////////////
-// window.addEventListener('load', fetchData([customersURL, bookingsURL, roomsURL]))
 loginForm.addEventListener('click', stopRefreshing)
 loginButton.addEventListener('click', verifyLogin)
 bookingViewButton.addEventListener('click', showbookingView)
@@ -84,46 +79,37 @@ roomResults.addEventListener('click', addBooking)
 
 //////////// FUNCTIONS ////////////
 function verifyLogin(){
-    console.log("you entered: ", username.value)
     let usernameInput = username.value
     let usernameNumber
     let passwordInput = password.value
-    if((usernameInput.length === 9 || usernameInput.length === 10) && passwordInput === "overlook2021")
+    if((usernameInput.length === 9 || usernameInput.length === 10) && passwordInput === 'overlook2021')
     {
-        usernameInput = usernameInput.split("")
-        usernameInput = (usernameInput.splice(0,8)).join("")
-        usernameNumber = username.value.split("")
-        usernameNumber = (usernameNumber.splice(8,2)).join("")
-        if(usernameInput === "customer" && (usernameNumber > 0 && usernameNumber <= 50)){
-            console.log("login 100% success")
+        usernameInput = usernameInput.split('')
+        usernameInput = (usernameInput.splice(0,8)).join('')
+        usernameNumber = username.value.split('')
+        usernameNumber = (usernameNumber.splice(8,2)).join('')
+        if(usernameInput === 'customer' && (usernameNumber > 0 && usernameNumber <= 50)){
             customerNumber = (Number(usernameNumber)).toString()
-            console.log("Here: ", customerNumber)
             customerURL = `http://localhost:3001/api/v1/customers/${customerNumber}`
-            console.log(customerURL)
             fetchData([customerURL, bookingsURL, roomsURL])
-            loginView.className = "login-view hidden"
-            reservationPage.className = "reservation-view"
+            loginView.className = 'login-view hidden'
+            reservationPage.className = 'reservation-view'
         }
         else{
-            console.log("wrong login")
-            incorrectLoginText.className = "incorrect-login-text"
+            incorrectLoginText.className = 'incorrect-login-text'
         }
     }
     else{
-        console.log("wrong login")
-        incorrectLoginText.className = "incorrect-login-text"
+        incorrectLoginText.className = 'incorrect-login-text'
     }
 }
 
 function fetchData(urls) {
     Promise.all([getData(urls[0]), getData(urls[1]), getData(urls[2])])
         .then(data => {
-            // apiCustomer = data[0].customers
             apiCustomer = data[0]
             apiBookings = data[1].bookings
             apiRooms = data[2].rooms
-            console.log("HEY: ", apiCustomer)
-
             createCustomer(apiCustomer)
             createRooms(apiRooms)
             displayAccountInfo()
@@ -133,9 +119,6 @@ function fetchData(urls) {
 }
 
 function createCustomer(data) {
-    // const randomUser = data[Math.floor(Math.random() * data.length)]
-    // currentCustomer = new Customer(randomUser)
-    console.log("DATA: ", apiCustomer.name)
     currentCustomer = new Customer(data)
     allBookings = currentCustomer.createBooking(apiBookings)
     return currentCustomer
@@ -148,8 +131,7 @@ function createRooms(data){
 }
 
 function displayAccountInfo(){
-    currentUser.innerText = currentCustomer.name +"'s account"
-    currentView = 'reservationView'
+    currentUser.innerText = currentCustomer.name + "'s account"
     gatherUsersAccountInfo()
     displayPastBookings()
     displayUpcomingBookings()
@@ -159,7 +141,6 @@ function displayAccountInfo(){
 function gatherUsersAccountInfo(){
     currentCustomer.findPastBookings(allBookings)
     customerPastBookings = currentCustomer.pastBookings
-
     currentCustomer.findUpcomingBookings(allBookings)
     customerUpcomingBookings = currentCustomer.upcomingBookings
 }
@@ -228,52 +209,50 @@ function displayUpcomingBookings(){
 function displayTotalCost(){
     currentCustomer.findCustomersBookings(allBookings)
     const formatedList = formatReservationInfo(currentCustomer.allBookings)
-
     let cumlativeCharge = formatedList.reduce((total, booking) => {
         total += booking.costPerNight
         return total
     }, 0)
-    amountText.innerText = "$"+cumlativeCharge.toFixed(2)
+    amountText.innerText = "$" + cumlativeCharge.toFixed(2)
 }
 
 function showbookingView(){
-    savedBooking.className = "saved-booking hidden"
-    roomResults.className = "room-results"
-    noResults.className = "no-results hidden"
-    currentViewText.innerText = "Booking View"
-    reservationPage.className = "reservation-view hidden"
-    bookingPage.className = "booking-view"
-    roomResults.className = "room-results"
-    badInput.className = "bad-input hidden"
+    savedBooking.className = 'saved-booking hidden'
+    roomResults.className = 'room-results'
+    noResults.className = 'no-results hidden'
+    currentViewText.innerText = 'Booking View'
+    reservationPage.className = 'reservation-view hidden'
+    bookingPage.className = 'booking-view'
+    roomResults.className = 'room-results'
+    badInput.className = 'bad-input hidden'
 }
 
 function showReservationsView(){
-    availableRoomsDatalist.innerHTML = "" 
-    requestedDate.value = ""
-    dropdownMenu.value = "select room"
-    currentView = 'reservationView'
-    currentViewText.innerText = "Reservation View"
-    reservationPage.className = "reservation-view"
-    bookingPage.className = "booking-view hidden"
+    availableRoomsDatalist.innerHTML = ''
+    requestedDate.value = ''
+    dropdownMenu.value = 'select room'
+    currentViewText.innerText = 'Reservation View'
+    reservationPage.className = 'reservation-view'
+    bookingPage.className = 'booking-view hidden'
 }
 
 function getRequestedDate(){
-    availableRoomsDatalist.innerHTML = "" 
-    customerRequestedDate = requestedDate.value.split("-")
-    customerRequestedDate = Number(customerRequestedDate.join(""))
-    if(requestedDate.value === ""){
-        roomResults.className = "room-results hidden"
-        badInput.className = "bad-input"
-        badInputMessage.innerText = "Please input a date"
+    availableRoomsDatalist.innerHTML = ''
+    customerRequestedDate = requestedDate.value.split('-')
+    customerRequestedDate = Number(customerRequestedDate.join(''))
+    if(requestedDate.value === ''){
+        roomResults.className = 'room-results hidden'
+        badInput.className = 'bad-input'
+        badInputMessage.innerText = 'Please input a date'
     }
     else if(customerRequestedDate < currentDate){
-        roomResults.className = "room-results hidden"
-        badInput.className = "bad-input"
-        badInputMessage.innerText = "Please pick a future date"
+        roomResults.className = 'room-results hidden'
+        badInput.className = 'bad-input'
+        badInputMessage.innerText = 'Please pick a future date'
     }
     else{
-        roomResults.className = "room-results"
-        badInput.className = "bad-input hidden"
+        roomResults.className = 'room-results'
+        badInput.className = 'bad-input hidden'
         availableRooms = currentCustomer.findAllAvailableRooms(customerRequestedDate, allBookings, allRooms)
         showAvailableRooms(availableRooms)
     }
@@ -284,8 +263,8 @@ function showAvailableRooms(availableRooms){
         showApologyMesssage()
     }
     else{
-        roomResults.className = "room-results"
-        noResults.className = "no-results hidden"
+        roomResults.className = 'room-results'
+        noResults.className = 'no-results hidden'
         let bedGrammar = ''
         let bidetStatus = ''
 
@@ -297,10 +276,10 @@ function showAvailableRooms(availableRooms){
                 bedGrammar = 'Beds'
             }
             if(currentRoom.bidet){
-                bidetStatus = "Yes"
+                bidetStatus = 'Yes'
             }
             else{
-                bidetStatus = "No"
+                bidetStatus = 'No'
             }
             availableRoomsDatalist.innerHTML += 
             `<article class="search-result-item-container">
@@ -321,28 +300,28 @@ function showAvailableRooms(availableRooms){
 }
 
 function showApologyMesssage(){
-    roomResults.className = "room-results hidden"
-    noResults.className = "no-results"
+    roomResults.className = 'room-results hidden'
+    noResults.className = 'no-results'
 }
 
 function displayFilteredList(){
-    if(dropdownMenu.value === "select room"){
-        roomResults.className = "room-results hidden"
-        badInput.className = "bad-input"
-        badInputMessage.innerText = "Please select a room type"
+    if(dropdownMenu.value === 'select room'){
+        roomResults.className = 'room-results hidden'
+        badInput.className = 'bad-input'
+        badInputMessage.innerText = 'Please select a room type'
     }
     else{
         if(availableRooms === undefined){
-            roomResults.className = "room-results hidden"
-            badInput.className = "bad-input"
-            badInputMessage.innerText = "Please input date & room type to see results"
+            roomResults.className = 'room-results hidden'
+            badInput.className = 'bad-input'
+            badInputMessage.innerText = 'Please input date & room type to see results'
         }
         else{
-            roomResults.className = "room-results"
-            badInput.className = "bad-input hidden"
+            roomResults.className = 'room-results'
+            badInput.className = 'bad-input hidden'
             filteredList = currentCustomer.filterByRoomType(dropdownMenu.value, availableRooms)
             if(filteredList.length > 0){
-                availableRoomsDatalist.innerHTML = "" 
+                availableRoomsDatalist.innerHTML = '' 
                 showAvailableRooms(filteredList)
             }
             else{
@@ -353,25 +332,25 @@ function displayFilteredList(){
 }
 
 function addBooking(event){
-    if(event.target.classList.contains("book-button")){
+    if(event.target.classList.contains('book-button')){
         roomNumToBook = Number(event.target.id)
     }
     formatPostData(currentCustomer.id, customerRequestedDate, roomNumToBook)
-    savedBooking.className = "saved-booking"
-    roomResults.className = "room-results hidden"
+    savedBooking.className = 'saved-booking'
+    roomResults.className = 'room-results hidden'
     updateReservations(postData)
 }
 
 function formatPostData(id, date, roomNumber){
     date = date.toString()
-    date = date.split("")
+    date = date.split('')
     let year = date.slice(0,4)
-    year = year.join("")
+    year = year.join('')
     let month = date.slice(4,6)
-    month = month.join("")
+    month = month.join('')
     let day = date.slice(6,8)
-    day = day.join("")
-    date = year + "/" + month + "/" + day
+    day = day.join('')
+    date = year + '/' + month + '/' + day
     postData = 
     { 
         userID: id, 
@@ -389,7 +368,6 @@ function updateReservations(formattedPostData){
         .then(response => response.json())
         .then(test => getData(bookingsURL))
         .then(data => {
-            console.log(data)
             updateBookings(data)
         })
         .catch(err => console.log('Fetch Error: ', err))
