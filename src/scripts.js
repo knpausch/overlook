@@ -12,7 +12,7 @@ import './images/perspective.png'
 import './images/calendar.png'
 
 //////////// File Import ////////////
-import './css/styles.css';
+import './css/styles.css'
 import getData from './apiCalls'
 import Customer from './Customer'
 import Room from './Room'
