@@ -235,9 +235,12 @@ function showReservationsView(){
     currentViewText.innerText = 'Reservation View'
     reservationPage.className = 'reservation-view'
     bookingPage.className = 'booking-view hidden'
+    savedBooking.className = 'saved-booking hidden'
+    availableRooms = []
 }
 
 function getRequestedDate(){
+    savedBooking.className = 'saved-booking hidden'
     availableRoomsDatalist.innerHTML = ''
     customerRequestedDate = requestedDate.value.split('-')
     customerRequestedDate = Number(customerRequestedDate.join(''))
@@ -306,6 +309,7 @@ function showApologyMesssage(){
 }
 
 function displayFilteredList(){
+    savedBooking.className = 'saved-booking hidden'
     if(dropdownMenu.value === 'select room'){
         roomResults.className = 'room-results hidden'
         badInput.className = 'bad-input'
@@ -382,7 +386,6 @@ function updateBookings(newData) {
     customerUpcomingBookings = currentCustomer.upcomingBookings
     displayUpcomingBookings()
     displayTotalCost()
-    availableRooms = []
 }
 
 //////////// HELPER FUNCTIONS ////////////
