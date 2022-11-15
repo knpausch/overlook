@@ -310,12 +310,14 @@ function displayFilteredList(){
         roomResults.className = 'room-results hidden'
         badInput.className = 'bad-input'
         badInputMessage.innerText = 'Please select a room type'
+        noResults.className = 'no-results hidden'
     }
     else{
         if(availableRooms === undefined){
             roomResults.className = 'room-results hidden'
             badInput.className = 'bad-input'
             badInputMessage.innerText = 'Please input date & room type to see results'
+            noResults.className = 'no-results hidden'
         }
         else{
             roomResults.className = 'room-results'
