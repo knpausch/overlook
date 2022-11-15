@@ -40,12 +40,13 @@ let postData
 let customerNumber
 
 //////////// QUERY SELECTORS ////////////
+export const viewInfo = document.querySelector('#viewInfo')
+export const reservationPage = document.querySelector('#reservationView')
 const currentUser = document.querySelector('#userText')
 const pastBookingsList = document.querySelector('#pastReservationsDatalist')
 const amountText = document.querySelector('#amountText')
 const upcomingBookingsList = document.querySelector('#upcomingReservationsDatalist')
 const bookingViewButton = document.querySelector('#bookingViewButton')
-const reservationPage = document.querySelector('#reservationView')
 const bookingPage = document.querySelector('#bookingView')
 const reservationViewButton = document.querySelector('#reservationViewButton')
 const currentViewText = document.querySelector('#currentViewText')
@@ -116,7 +117,7 @@ function fetchData(urls) {
             displayAccountInfo()
             setCurrentDate()
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log("Error: " + err))
 }
 
 function createCustomer(data) {
