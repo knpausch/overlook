@@ -92,6 +92,7 @@ function verifyLogin(){
             customerNumber = (Number(usernameNumber)).toString()
             customerURL = `http://localhost:3001/api/v1/customers/${customerNumber}`
             fetchData([customerURL, bookingsURL, roomsURL])
+            currentViewText.innerText = 'Reservation View'
             loginView.className = 'login-view hidden'
             reservationPage.className = 'reservation-view'
         }

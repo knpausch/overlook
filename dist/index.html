@@ -12,18 +12,17 @@
 <body>
   <header class="header-section">
     <img class="room-service-img" src="./images/room-service.png" alt="hotel food service cart cartoon icon">
-    <div class="overlook-container">
+    <section class="overlook-container">
       <h1>The Overlook Hotel ™</h1>
-    </div>
-    <div class="pageview-container">
-      <div class="view-info">
-        <h2 class="current-view-text" id="currentViewText">Reservation View</h2>
-        <h2 class="user-text" id="userText">User:</h2>
-      </div>
-    </div>
+    </section>
+    <section class="pageview-container">
+      <article class="view-info">
+        <h2 class="current-view-text" id="currentViewText">Welcome!</h2>
+        <h2 class="user-text" id="userText">Sign in:</h2>
+      </article>
+    </section>
   </header>
   <main class="main">
-    <!-- LOGIN VIEW -->
     <section class="login-view" id="loginView">
       <img class="hotel-img" src="./images/hotel.jpg" alt="outdoor view of hipster hotel at night time, looks expensive">
       <img class="lobby-img" src="./images/lobby.jpg" alt="hipster hotel lobby full of poofy chairs and lots of framed art">
@@ -36,7 +35,6 @@
         <img class="bell-img" src="./images/ring-bell.png" alt="service bell cartoon icon">
       </form>
     </section>
-    <!-- RESERVATION VIEW -->
     <section class="reservation-view hidden" id="reservationView">
       <section class="past-bookings-container">
         <h2>Past Reservations</h2>
@@ -47,7 +45,7 @@
         <img class="relax-img" src="./images/relax.jpg" alt="relaxing dinner table next to the window">
         <article class="total-cost-container">
           <h4 class="total-cost-text">Total Cost:</h4>
-          <h5 class="amount-text" id="amountText">$156.84</h5>
+          <h5 class="amount-text" id="amountText"></h5>
         </article>
         <article class="to-booking-view-container">
           <h4 class="book-your-stay-text">Book Your Stay Today!</h4>
@@ -60,7 +58,6 @@
         </section>
       </section>
     </section>
-    <!-- BOOKING VIEW -->
     <section class="booking-view hidden" id="bookingView">
       <section class="booking-controls-container" id="bookingControlsContainer">
         <form class="date-input-container">
@@ -72,7 +69,7 @@
         </form>
         <form class="room-filter-container">
           <label class ="select-room-text" for="dropdownMenu">Select Room Type</label><br>
-          <div class="dropdown-and-search">
+          <section class="dropdown-and-search">
             <select class="dropdown-menu" name="room-types" id="dropdownMenu">
               <option value="select room">Select Room</option>
               <option value="single room">Single Room</option>
@@ -81,7 +78,7 @@
               <option value="residential suite">Residential Suite</option>
             </select>
             <button class="submit-filter-button" id="submitFilterButton">Submit</button>
-          </div>
+          </section>
         </form>
         <form class="room-filter-container">
           <h2 class="view-reservations-text">View Reservations</h2>
@@ -91,13 +88,11 @@
       <section class="filter-settings-container">
       </section>
       <article class="search-results-container">
-        <!-- RESULTS FOUND -->
         <section class="room-results" id="roomResults">
           <h2 class="available-rooms-text">Available Rooms</h2>
           <section class="available-rooms-datalist" id="availableRoomsDatalist">
           </section>
         </section>
-        <!-- RESULTS NOT FOUND -->
         <section class="no-results hidden" id="noResults">
           <h2>Uh oh</h2>
           <img class="sad-img" src="./images/sad.png" alt="sad face cartoon icon">
@@ -114,13 +109,11 @@
             <h2>- CEO Kiko “Smokin' Deals” Pausch</h2>
             <h5>*excluding Hawaii and the US territories</h4>
         </section>
-        <!-- PLEASE INPUT DATE/ROOM TYPE TO SEE RESULTS -->
         <section class="bad-input hidden" id="badInput">
           <h2>Uh oh</h2>
           <img class="sad-img" src="./images/sad.png" alt="sad face cartoon icon">
           <h3 class="bad-input-message" id="badInputMessage"></h3>
         </section>
-        <!-- BOOKING HAS BEEN SAVED -->
         <section class="saved-booking hidden" id="savedBooking">
           <h2>Whoo hoo!</h2>
           <img class="happy-img" src="./images/happy.png" alt="happy face cartoon icon">
@@ -129,7 +122,6 @@
       </article>
     </section>
   </main>
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>
 </html>
